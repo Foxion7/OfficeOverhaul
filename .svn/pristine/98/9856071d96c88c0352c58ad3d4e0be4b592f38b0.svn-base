@@ -1,0 +1,221 @@
+﻿using KantoorApplicatie.Views;
+using KantoorApplicatie.Models;
+using KantoorApplicatie.Models.Theme;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using KantoorApplicatie.Db;
+using KantoorApplicatie.Controllers;
+using System.IO;
+using System.Xml;
+using KantoorApplicatie.Models.Floor;
+using KantoorApplicatie.Models.Invoice;
+using KantoorApplicatie.Views.Invoice;
+using KantoorApplicatie.Views.Themeforms;
+
+namespace KantoorApplicatie
+{
+    public partial class MainView : Form
+    {
+        public Room room;
+        // Remembers what last used sub theme is.
+        // Background image.
+        private Views.MainMenu mm;
+        private List<Product> productList;
+        private List<FloorType> floorTypeList;
+
+        private XmlController xml = new XmlController();
+
+        public MainView(Views.MainMenu mm)
+        {
+            MaximizeBox = false;
+            MinimizeBox = false;
+            
+            InitializeComponent();
+            this.mm = mm;
+            productList = DatabaseController.GetProducts();
+            floorTypeList = DatabaseController.GetFloorType();
+            // Sets all products in the database into the catalog list.
+            catalogPanel1.InstantiateProductList(DatabaseController.GetProducts(), DesignPanel1);
+            // Sets necessary info in the XmlController.
+            setBackground(DatabaseController.getLastSubTheme());
+            room = new Room();
+            room.productList = new List<Product>();
+            xml.room = room;
+            xml.productList = productList;
+            xml.floorTypeList = floorTypeList;
+            xml.dp = DesignPanel1;
+        }
+
+        private void nieuwToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenXML();
+        }
+
+        private void optiesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        // Opens menu to change the theme or add a new theme.
+        private void ThemeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ThemeForm tf = new ThemeForm(this, mm);
+            tf.ShowDialog();
+            if (tf.DialogResult == DialogResult.OK)
+            {
+                mm.Hide();
+                this.Show();
+            }
+        }
+
+        // Opens menu to add a new product to the catalog.
+        private void nieuwObjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NewProductForm nof = new NewProductForm(catalogPanel1);
+            nof.ShowDialog();
+        }
+
+        private void productPanel1_Resize(object sender, EventArgs e)
+        {
+
+        }
+
+        // Open shapeselector.
+        public void ShapeSelect()
+        {
+            
+            ShapeSelector ss = new ShapeSelector(room, DatabaseController.GetFloorMaterial(), DatabaseController.GetFloorType());
+
+            ss.ShowDialog();
+            if (ss.DialogResult == DialogResult.OK)
+            { 
+                room.productList = new List<Product>();
+                DesignPanel1.rDesign = room;
+                mm.Hide();
+                this.Show();
+            }
+
+        }
+
+        // Clears the theme.
+        public void clearBackground()
+        {
+            DesignPanel1.BackgroundImage = null;
+        }
+
+        // Set the backgroundpicture.
+        public void setBackground(SubTheme st)
+        {
+            if (st != null)
+            {
+                DesignPanel1.BackgroundImage = st.GetImage();
+                DesignPanel1.BackgroundImageLayout = ImageLayout.Stretch;
+            }
+        }
+        
+        // Make a new invoice with the products in the room.
+        private void nieuweFactuurToolStripMenuItem_Click(object sender, EventArgs e) 
+        {
+			InvoiceForm ivf = new InvoiceForm(DesignPanel1.rDesign);            
+			ivf.InstantiateAutocompleteLists();
+            ivf.FillExistingCustomerList();
+            ivf.ShowDialog();
+        }
+
+        // Save the room with all its products in an XML.
+        private void bewerkbaarOpslaanToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog dlg = new SaveFileDialog();
+            dlg.FileName = "Document";
+            dlg.DefaultExt = ".xml";
+            dlg.Filter = "XML Files (*.xml) | *.xml";
+
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                if (DesignPanel1.rDesign != null)
+                {
+                    xml.SaveXml(dlg.FileName);
+                    MessageBox.Show(String.Format("Bestand opgeslagen in {0}", dlg.FileName));
+                }
+                else
+                {
+                    MessageBox.Show("Maak eerst een ruimte aan!");
+                }
+            }
+        }
+
+        // Load a room with all its products from XML.
+        public void OpenXML()
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Filter = "XML Files (*.xml) | *.xml";
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                xml.OpenXml(dlg.FileName);
+                Show();
+                mm.Hide();
+            }
+        }
+
+        // Confirmation message to exit program.
+        private void MainView_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                DialogResult result = MessageBox.Show("Weet u het zeker?", "Afsluiten", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    Environment.Exit(1);
+                }
+                else
+                {
+                    e.Cancel = true;
+                }
+            }
+            else
+            {
+                e.Cancel = true;
+            }
+        }
+
+        // Close button click event.
+        private void closeBox_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        // Hover event to highlight close button when hovering over.
+        private void closeBox_MouseHover(object sender, EventArgs e)
+        {
+            closeBox.BackgroundImage = Properties.Resources.ExitHover;
+        }
+
+        // Resets the image of the close button when mouse leaves the area.
+        private void closeBox_MouseLeave(object sender, EventArgs e)
+        {
+            closeBox.BackgroundImage = Properties.Resources.Exit;
+        }
+        // Opens form to choose a room shape.
+        private void vormKiezenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShapeSelect();
+        }
+
+        private void vormZelfMakenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            roomMaker1.Show();
+        }
+    }
+}

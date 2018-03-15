@@ -1,0 +1,33 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data.Entity;
+using KantoorApplicatie.Models;
+using KantoorApplicatie.Models.Theme;
+using KantoorApplicatie.Models.Floor;
+using KantoorApplicatie.Models.Invoice;
+using System.Drawing;
+
+namespace KantoorApplicatie.Db
+{
+    class MyContext : DbContext
+    {
+        public virtual DbSet<Theme> themes { get; set; }
+        public virtual DbSet<SubTheme> subThemes { get; set; }
+        public virtual DbSet<FloorMaterial> floorMaterial { get; set; }
+        public virtual DbSet<FloorType> floorType { get; set; }
+        public virtual DbSet<Product> products { get; set; }
+        public virtual DbSet<Customer> customers { get; set; }
+        public virtual DbSet<Representative> representatives { get; set; }
+        public virtual DbSet<InvoiceData> invoices { get; set; }
+        public virtual DbSet<OrderedProduct> orderedProducts { get; set; }
+        public virtual DbSet<Room> rooms { get; set; }
+        public virtual DbSet<Line> lines { get; set; }
+        public MyContext() : base("KantoorApplicatie")
+        {
+
+        }
+    }
+}

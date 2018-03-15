@@ -1,0 +1,219 @@
+﻿using KantoorApplicatie.Controllers;
+using KantoorApplicatie.Db;
+using KantoorApplicatie.Models;
+using KantoorApplicatie.Models.Invoice;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace KantoorApplicatie.Views
+{
+    public partial class InvoiceForm : Form
+    {
+        private InvoiceController ic;
+        private Representative representative;
+        private Room room;
+
+		public InvoiceForm(Room room)
+        {
+            InitializeComponent();
+            this.room = room;
+
+            // Sets date and gives a unique InvoiceLabel.
+            dateInvoiceDateLabel.Text = DateTime.Now.ToShortDateString();
+			intInvoiceNumberLabel.Text = (DatabaseController.GetInvoiceData().Count + 1).ToString();
+            this.representative = DatabaseController.GetRepresentatives().First();
+            ic = new InvoiceController(invoiceListPanel1, room.productList);
+
+            ic.FillDisplayedProductList();
+            intInvoiceTotalPriceLabelprijsLabel.Text = ic.totalPrice.ToString();
+        }
+
+        // Generates PDF.
+        private void generateButton_Click(object sender, EventArgs e)
+        {
+            Customer customer = null;
+
+            if (string.IsNullOrWhiteSpace(companyNameTextbox.Text) ||
+                string.IsNullOrWhiteSpace(nameTextbox.Text) ||
+                string.IsNullOrWhiteSpace(departmentTextbox.Text) ||
+                string.IsNullOrWhiteSpace(postalcodeTextbox.Text) ||
+                string.IsNullOrWhiteSpace(locationTextbox.Text) ||
+                string.IsNullOrWhiteSpace(phonenumberTextbox.Text) ||
+                string.IsNullOrWhiteSpace(emailTextbox.Text) ||
+                string.IsNullOrWhiteSpace(kvkNumberTextbox.Text) ||
+                string.IsNullOrWhiteSpace(ibanTextbox.Text)) {
+                MessageBox.Show("Vul alstublieft alle velden in.", "Foutmelding",
+                MessageBoxButtons.OK);
+            } 
+            else 
+            {
+                try 
+                {
+                    customer = new Customer(
+                        companyNameTextbox.Text,
+                        nameTextbox.Text,
+                        departmentTextbox.Text,
+                        postalcodeTextbox.Text,
+                        locationTextbox.Text,
+                        adresTextbox.Text,
+                        phonenumberTextbox.Text,
+                        emailTextbox.Text,
+                        kvkNumberTextbox.Text,
+                        ibanTextbox.Text
+                        );
+                } 
+                catch (InvalidOperationException ioe) 
+                {
+                    Console.WriteLine(ioe);
+                }
+            }
+
+            // Adds Invoice to database.
+            if (ic.productPanelList.Count > 0) 
+            {
+                var mc = new MyContext();
+                using (mc) 
+                {
+
+                    if (DatabaseController.GetCustomers().Count() == 0) 
+                    {
+                        DatabaseController.AddCustomer(customer);
+                    }
+                    bool exists = false;
+                    foreach(Customer c in DatabaseController.GetCustomers()) 
+                    {
+                        if ((c.companyName + c.department + c.name).Equals((customer.companyName + customer.department + customer.name))) 
+                        {
+                            exists = true;
+                        }
+                    } 
+                    if(!exists) 
+                    {
+                        DatabaseController.AddCustomer(customer);
+                    }
+
+                    InvoiceData invoice = new InvoiceData(customer, representative, DateTime.Parse(dateInvoiceDateLabel.Text), room);
+                    DatabaseController.AddRoom(room);
+                    DatabaseController.AddInvoice(invoice);
+                    invoice = DatabaseController.GetInvoiceData().Last();
+
+                    foreach (InvoiceProductPanel ipp in ic.productPanelList) 
+                    {
+                        var orderedProduct = new OrderedProduct 
+                        {
+                            invoiceData = (from s in mc.invoices
+                                           where s.InvoiceDataId == invoice.InvoiceDataId
+                                        select s).Single(),
+                            product = (from s in mc.products
+                                        where s.name == ipp.product.name
+                                        select s).Single(),
+                            amount = ipp.amountOfCopies
+                        };
+                        mc.orderedProducts.Add(orderedProduct);
+                        mc.SaveChanges();
+                    }
+                }
+                
+                ic.SetInfo(customer, representative, intInvoiceNumberLabel.Text.ToString(), room);
+                ic.MakePdf();
+                Close();
+            }
+        }
+
+        // Fills combobox with previously created customers.
+        public void FillExistingCustomerList() 
+        {
+            
+            customerComboBox.DataSource = DatabaseController.GetCustomers();
+            customerComboBox.DisplayMember = "name";
+        }
+
+        // Check for right values.
+        private void nameTextbox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(char.IsLetter(e.KeyChar) || char.IsSeparator(e.KeyChar) || e.KeyChar == (char)Keys.Back);
+        }
+
+        private void kvkTextbox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        private void phoneNumberTextbox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+        
+        // Instantiates the lists of recommendations when filling Invoice Textboxes.
+        public void InstantiateAutocompleteLists() 
+        {
+            var companyNameList = new AutoCompleteStringCollection();
+            var nameList = new AutoCompleteStringCollection();
+            var departmentList = new AutoCompleteStringCollection();
+            var postalcodeList = new AutoCompleteStringCollection();
+            var locationList = new AutoCompleteStringCollection();
+            var adresList = new AutoCompleteStringCollection();
+            var phoneNumberList = new AutoCompleteStringCollection();
+            var emailList = new AutoCompleteStringCollection();
+            var kvkList = new AutoCompleteStringCollection();
+            var ibanList = new AutoCompleteStringCollection();
+
+            // Get all customerdata from database.
+            foreach (Customer customer in DatabaseController.GetCustomers()) 
+            {
+                companyNameList.Add(customer.companyName);
+                nameList.Add(customer.name);
+                departmentList.Add(customer.department);
+                postalcodeList.Add(customer.postalCode);
+                locationList.Add(customer.location);
+                adresList.Add(customer.adres);
+                phoneNumberList.Add(customer.phonenumber);
+                emailList.Add(customer.email);
+                kvkList.Add(customer.kvkNumber);
+                ibanList.Add(customer.iban);
+            }
+
+            // Link customerdata to recomendations.
+            companyNameTextbox.AutoCompleteCustomSource = companyNameList;
+            nameTextbox.AutoCompleteCustomSource = nameList;
+            departmentTextbox.AutoCompleteCustomSource = departmentList;
+            postalcodeTextbox.AutoCompleteCustomSource = postalcodeList;
+            locationTextbox.AutoCompleteCustomSource = locationList;
+            adresTextbox.AutoCompleteCustomSource = adresList;
+            phonenumberTextbox.AutoCompleteCustomSource = phoneNumberList;
+            emailTextbox.AutoCompleteCustomSource = emailList;
+            kvkNumberTextbox.AutoCompleteCustomSource = kvkList;
+            ibanTextbox.AutoCompleteCustomSource = ibanList;
+        }
+
+        // Fills textboxes when customer is selected from combobox.
+        private void customerComboBox_SelectedIndexChanged(object sender, EventArgs e) 
+        {
+            Customer currentCustomer = new Customer();
+            foreach(Customer customer in DatabaseController.GetCustomers()) 
+            {
+                if (customer.name.Equals(customerComboBox.Text)) 
+                {
+                    currentCustomer = customer;
+                    companyNameTextbox.Text = customer.companyName;
+                    nameTextbox.Text = customer.name;
+                    departmentTextbox.Text = customer.department;
+                    postalcodeTextbox.Text = customer.postalCode;
+                    locationTextbox.Text = customer.location;
+                    adresTextbox.Text = customer.adres;
+                    phonenumberTextbox.Text = customer.phonenumber;
+                    emailTextbox.Text = customer.email;
+                    kvkNumberTextbox.Text = customer.kvkNumber;
+                    ibanTextbox.Text = customer.iban;
+                }
+            }
+        }
+    }
+}

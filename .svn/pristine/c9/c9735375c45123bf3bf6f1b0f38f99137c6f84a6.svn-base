@@ -1,0 +1,127 @@
+﻿using KantoorApplicatie.Views;
+using KantoorApplicatie.Models;
+using KantoorApplicatie.Models.Theme;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using KantoorApplicatie.Db;
+using KantoorApplicatie.Controllers;
+using KantoorApplicatie.Models.Invoice;
+using KantoorApplicatie.Views.Invoice;
+using KantoorApplicatie.Views.InvoiceManager;
+
+namespace KantoorApplicatie.Views
+{
+    public partial class MainMenu : Form
+    {
+        public List<Representative> representativeList { get; set; }
+        public Representative representative { get; set; }
+        MainView mv;
+
+        public MainMenu()
+        {
+            InitializeComponent();
+            // If there is no database, run these.
+            DatabaseController.AddProductsFirstRun();
+            DatabaseController.AddThemesForTheFirstRun();
+            DatabaseController.AddFloorsForFirstRun();
+            var mc = new MyContext();
+            representativeList = new List<Representative>();
+            representativeList = (from s in mc.representatives
+                                                    select s).ToList();
+            setBackground(DatabaseController.getLastSubTheme());
+            this.mv = new MainView(this);
+            mv.Hide();
+        }
+
+        private void b_New_Click(object sender, EventArgs e)
+        {
+            var mc = new MyContext();
+
+            RepresentativeForm rf;
+            if (mc.representatives.Count() <= 0) {
+                rf = new RepresentativeForm();
+                rf.ShowDialog();
+                if (rf.representative != null) {
+                    representative = rf.representative;
+                    mc.representatives.Add(representative);
+                    mc.SaveChanges();
+                }
+            }
+            if (mc.representatives.Count() > 0) {
+                mv.ShapeSelect();
+            }
+        }
+
+        private void b_Open_Click(object sender, EventArgs e)
+        {
+            mv.OpenXML();
+        }
+
+        private void b_Thema_Click(object sender, EventArgs e)
+        {
+            ThemeForm tf = new ThemeForm(mv, this);
+            tf.ShowDialog();
+        }
+
+        private void b_Close_Click(object sender, EventArgs e)
+        {
+            Environment.Exit(0);
+        }
+
+        private void l_Help_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("U kunt een nieuw ontwerp maken, een eerder ontwerp openen en bewerken of een achtergrond selecteren", "Help", MessageBoxButtons.OK);
+        }
+
+        private void MainMenu_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                DialogResult result = MessageBox.Show("Weet u het zeker?", "Afsluiten", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    Application.Exit();
+                }
+                else
+                {
+                    e.Cancel = true;
+                }
+            }
+            else
+            {
+                e.Cancel = true;
+            }
+        }
+
+        public void clearBackground()
+        {
+            this.BackgroundImage = null;
+        }
+
+        public void setBackground(SubTheme st)
+            {
+            if (st != null)
+            {
+                this.BackgroundImage = st.GetImage();
+                this.BackgroundImageLayout = ImageLayout.Stretch;
+            }
+        }
+
+        private void representativeButton_Click(object sender, EventArgs e) {
+
+        }
+
+        private void InvoiceManagerButton_Click(object sender, EventArgs e)
+        {
+            InvoiceManagerForm imf = new InvoiceManagerForm();
+            imf.ShowDialog();
+        }
+    }
+}

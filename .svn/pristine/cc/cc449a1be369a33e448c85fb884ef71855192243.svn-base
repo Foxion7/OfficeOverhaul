@@ -1,0 +1,105 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using KantoorApplicatie.Views;
+using System.Xml;
+using KantoorApplicatie.Models;
+using KantoorApplicatie.Models.Floor;
+
+namespace KantoorApplicatie.Controllers
+{
+    public class XmlController
+    {
+        public Room room;
+        //public List<FloorType> floorTypeList;
+        //public List<Product> productList;
+        public DesignPanel dp;
+        public bool fromMainMenu = false;
+
+        public XmlController()
+        {
+            //productList = new List<Product>();
+        }
+
+        // Opens the selected xml file.
+        public void OpenXml(string filepath)
+        {
+            dp.containsInactiveProduct = false;
+
+            XmlDocument doc = new XmlDocument();
+            doc.Load(filepath);
+
+            // Gets first child of the document.
+            XmlNode roomNode = doc.DocumentElement.FirstChild;
+
+            // Gets the information from the document.
+            room.shape = roomNode.ChildNodes[0].InnerText;
+            room.height = Int32.Parse(roomNode.ChildNodes[1].InnerText);
+            room.width = Int32.Parse(roomNode.ChildNodes[2].InnerText);
+            room.floorType = Db.DatabaseController.floorTypeList.Find(f => f.name == roomNode.ChildNodes[3].InnerText);
+            if (!fromMainMenu)
+            {
+                dp.rDesign.productList = new List<Product>();
+            }
+            fromMainMenu = false;
+            dp.rDesign = room;
+            // Gets the information from all the saved products in the document.
+            foreach (XmlNode node in doc.DocumentElement.ChildNodes[1].ChildNodes)
+            {
+                Product product = Db.DatabaseController.productList.Find(p => p.productId == Int32.Parse(node.ChildNodes[0].InnerText)).Clone();
+                if (product != null && product.active)
+                {
+                    product.SetLocation(Int32.Parse(node.ChildNodes[1].InnerText), Int32.Parse(node.ChildNodes[2].InnerText));
+                    product.rp = new RotatePanel(product, dp);
+                    product.rp.StartRotation();
+                    dp.AddProduct(product);
+                }
+                // Handle inactive products, giving them a replacement image.
+                else if (product !=null && !product.active)
+                {
+                    Product inactiveProduct = product;
+                    inactiveProduct.image = Properties.Resources.InactiveProduct;
+                    inactiveProduct.SetLocation(Int32.Parse(node.ChildNodes[1].InnerText), Int32.Parse(node.ChildNodes[2].InnerText));
+                    inactiveProduct.rp = new RotatePanel(inactiveProduct, dp);
+                    product.rp.StartRotation();
+                    dp.AddProduct(inactiveProduct);
+                    dp.containsInactiveProduct = true;
+                }
+            }
+        }
+
+        public void SaveXml(string filepath)
+        {
+            XmlDocument doc = new XmlDocument();
+
+            // Make declaration and add nodes.
+            XmlDeclaration xmlDeclaration = doc.CreateXmlDeclaration("1.0", "ISO-8859-1", null);
+            XmlNode office = doc.CreateElement("office");
+            XmlNode room = doc.CreateElement("room");
+            doc.AppendChild(office);
+            office.AppendChild(room);
+
+            // Set the information for the room.
+            room.AppendChild(doc.CreateElement("shape")).InnerText = string.Format("{0}", dp.rDesign.shape);
+            room.AppendChild(doc.CreateElement("height")).InnerText = string.Format("{0}", dp.rDesign.height);
+            room.AppendChild(doc.CreateElement("width")).InnerText = string.Format("{0}", dp.rDesign.width);
+            room.AppendChild(doc.CreateElement("floorType")).InnerText = string.Format("{0}", dp.rDesign.floorType.name.ToString());
+
+            XmlNode products = doc.CreateElement("products");
+            office.AppendChild(products);
+
+            // Set the information for all the products.
+            foreach (Product product in dp.rDesign.productList)
+            {
+                XmlNode p = doc.CreateElement("product");
+                products.AppendChild(p);
+                p.AppendChild(doc.CreateElement("productID")).InnerText = string.Format("{0}", product.productId);
+                p.AppendChild(doc.CreateElement("X")).InnerText = string.Format("{0}", product.location.X);
+                p.AppendChild(doc.CreateElement("Y")).InnerText = string.Format("{0}", product.location.Y);
+            }
+            doc.Save(filepath);
+        }
+    }
+}

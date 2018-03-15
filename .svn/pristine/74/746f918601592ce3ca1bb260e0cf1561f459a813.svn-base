@@ -1,0 +1,48 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using KantoorApplicatie.Models;
+using KantoorApplicatie.Controllers;
+
+namespace KantoorApplicatie.Views {
+    public partial class CatalogProductPanel : UserControl 
+    {
+        public Product product { get; set; }
+
+        private DragController dc;
+
+        public CatalogProductPanel(Product product, DesignPanel dp) 
+        {
+            InitializeComponent();
+            this.product = product;
+            dc = new DragController(product, dp);
+            // Sets productvalues.
+            nameLabel.Text = product.name;
+            priceLabel.Text = "Prijs: €" + product.price.ToString();
+            descriptionLabel.Text = product.description;
+            widthLabel.Text = product.width.ToString() + " cm";
+            heightLabel.Text = product.height.ToString() + " cm";
+            pictureBox1.Image = product.GetImage();
+        }
+        
+        // This starts the dragging of a picture from the catalog to DesignPanel.
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Left)
+            {
+                dc.StartDrag(sender, e);
+            }
+        }
+        // This starts the placing of a picture held after dragging it from catalog.
+        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+        {
+            dc.PlaceProduct();
+        }
+    }
+}

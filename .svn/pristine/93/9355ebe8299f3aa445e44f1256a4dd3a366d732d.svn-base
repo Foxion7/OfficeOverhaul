@@ -1,0 +1,90 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using KantoorApplicatie.Models;
+using System.Drawing.Imaging;
+using System.Drawing.Drawing2D;
+
+namespace KantoorApplicatie.Views
+{
+    public partial class RotatePanel : UserControl
+    {
+        private Product p;
+        private DesignPanel dp;
+        int count = 0;
+
+        public RotatePanel(Product p, DesignPanel dp)
+        {
+            this.p = p;
+            this.dp = dp;
+            InitializeComponent();
+        }
+
+        private void UpdatePanel()
+        {
+            dp.Invalidate();
+        }
+
+        // Rotate image to the left.
+        private void Left_Click(object sender, EventArgs e)
+        {
+            p.RotateImage(RotateFlipType.Rotate270FlipNone);
+            UpdatePanel();
+        }
+
+        // Rotate image to the right.
+        private void Right_Click(object sender, EventArgs e)
+        {
+            count++;
+            p.image = RotateImageBasicThree(p.image, count);
+            
+            UpdatePanel();
+        }
+
+        // Delete product from the list of products.
+        private void Delete_Click(object sender, EventArgs e)
+        {
+            dp.DeleteProduct(p);
+            dp.Controls.Remove(p.rp);
+            UpdatePanel();
+        }
+
+        public static Bitmap RotateImageBasicThree(Bitmap img, float rotationAngle) {
+            //create an empty Bitmap image
+            // Als je hier een getal bij de beide waardes tovoegt zoals +30, zal het binnenste plaatje kleiner worden.
+            Bitmap bmp = new Bitmap(img.Width, img.Height);
+            Console.WriteLine("Width: " + bmp.Width + " Height: " + bmp.Height);
+            bmp.SetResolution(img.HorizontalResolution, img.VerticalResolution);
+
+            //turn the Bitmap into a Graphics object
+            Graphics gfx = Graphics.FromImage(bmp);
+
+            //now we set the rotation point to the center of our image
+            gfx.TranslateTransform((float)bmp.Width / 2, (float)bmp.Height / 2);
+
+            //now rotate the image
+            gfx.RotateTransform(rotationAngle);
+
+            gfx.TranslateTransform(-(float)bmp.Width / 2, -(float)bmp.Height / 2);
+
+            //set the InterpolationMode to HighQualityBicubic so to ensure a high
+            //quality image once it is transformed to the specified size
+            gfx.InterpolationMode = InterpolationMode.HighQualityBicubic;
+
+            //now draw our new image onto the graphics object
+            gfx.DrawImage(img, new Point(0, 0));
+
+            //dispose of our Graphics object
+            gfx.Dispose();
+
+            //return the image
+            return bmp;
+        }
+    }
+}

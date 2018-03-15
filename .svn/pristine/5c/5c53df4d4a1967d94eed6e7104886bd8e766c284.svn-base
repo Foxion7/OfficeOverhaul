@@ -1,0 +1,432 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DBF744EA-7C65-4D51-9A87-0A76FF80BFFF}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>KantoorApplicatie</RootNamespace>
+    <AssemblyName>KantoorApplicatie</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.DocumentObjectModel">
+      <HintPath>C:\Users\Tristan\Desktop\PDFsharp\PDFsharp-MigraDocFoundation-Assemblies-1_31\GDI+\MigraDoc.DocumentObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.Rendering">
+      <HintPath>C:\Users\Tristan\Desktop\PDFsharp\PDFsharp-MigraDocFoundation-Assemblies-1_31\GDI+\MigraDoc.Rendering.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.RtfRendering">
+      <HintPath>C:\Users\Tristan\Desktop\PDFsharp\PDFsharp-MigraDocFoundation-Assemblies-1_31\GDI+\MigraDoc.RtfRendering.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp, Version=1.32.3057.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp.1.32.3057.0\lib\net20\PdfSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.Charting, Version=1.32.3057.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp.1.32.3057.0\lib\net20\PdfSharp.Charting.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\CatalogController.cs" />
+    <Compile Include="Controllers\Converter.cs" />
+    <Compile Include="Controllers\DesignPanelController.cs" />
+    <Compile Include="Controllers\DragController.cs" />
+    <Compile Include="Controllers\InvoiceManagerController.cs" />
+    <Compile Include="Controllers\RotationController.cs" />
+    <Compile Include="Controllers\XmlController.cs" />
+    <Compile Include="Db\DatabaseController.cs" />
+    <Compile Include="Db\MyContext.cs" />
+    <Compile Include="Models\Invoice\Customer.cs" />
+    <Compile Include="Models\Invoice\InvoiceData.cs" />
+    <Compile Include="Models\Invoice\OrderedProduct.cs" />
+    <Compile Include="Models\Invoice\Representative.cs" />
+    <Compile Include="Models\Line.cs" />
+    <Compile Include="Models\Sofa.cs" />
+    <Compile Include="Models\Essentials.cs" />
+    <Compile Include="Models\Closet.cs" />
+    <Compile Include="Controllers\InvoiceController.cs" />
+    <Compile Include="Models\Floor\FloorMaterial.cs" />
+    <Compile Include="Models\Floor\FloorType.cs" />
+    <Compile Include="Models\Lamp.cs" />
+    <Compile Include="Models\Plant.cs" />
+    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\Room.cs" />
+    <Compile Include="Models\Chair.cs" />
+    <Compile Include="Models\Table.cs" />
+    <Compile Include="Models\Theme\SubTheme.cs" />
+    <Compile Include="Models\Theme\Theme.cs" />
+    <Compile Include="Models\WallAccessories.cs" />
+    <Compile Include="Views\DrawRoom\ChooseFloor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\DrawRoom\ChooseFloor.Designer.cs">
+      <DependentUpon>ChooseFloor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CustomerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\CustomerForm.designer.cs">
+      <DependentUpon>CustomerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InvoiceManager\InvoiceManagerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\InvoiceManager\InvoiceManagerForm.Designer.cs">
+      <DependentUpon>InvoiceManagerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InvoiceManager\InvoiceManagerItem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\InvoiceManager\InvoiceManagerItem.Designer.cs">
+      <DependentUpon>InvoiceManagerItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InvoiceManager\InvoiceManagerList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\InvoiceManager\InvoiceManagerList.Designer.cs">
+      <DependentUpon>InvoiceManagerList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Invoice\InvoiceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Invoice\InvoiceForm.Designer.cs">
+      <DependentUpon>InvoiceForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Invoice\InvoiceListPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Invoice\InvoiceListPanel.Designer.cs">
+      <DependentUpon>InvoiceListPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Invoice\InvoiceProductPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Invoice\InvoiceProductPanel.Designer.cs">
+      <DependentUpon>InvoiceProductPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RemoveProductForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\RemoveProductForm.Designer.cs">
+      <DependentUpon>RemoveProductForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RepresentativeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\RepresentativeForm.Designer.cs">
+      <DependentUpon>RepresentativeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\MainView.Designer.cs">
+      <DependentUpon>MainView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\MainMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\MainMenu.Designer.cs">
+      <DependentUpon>MainMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NewProductForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\NewProductForm.Designer.cs">
+      <DependentUpon>NewProductForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Catalog\CatalogListPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Catalog\CatalogListPanel.Designer.cs">
+      <DependentUpon>CatalogListPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Catalog\CatalogProductPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Catalog\CatalogProductPanel.Designer.cs">
+      <DependentUpon>CatalogProductPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DrawRoom\RoomMaker.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\DrawRoom\RoomMaker.Designer.cs">
+      <DependentUpon>RoomMaker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RotatePanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\RotatePanel.Designer.cs">
+      <DependentUpon>RotatePanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DrawRoom\SaveRoom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\DrawRoom\SaveRoom.Designer.cs">
+      <DependentUpon>SaveRoom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Themeforms\ThemeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Themeforms\ThemeForm.Designer.cs">
+      <DependentUpon>ThemeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DesignPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\DesignPanel.Designer.cs">
+      <DependentUpon>DesignPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Catalog\CatalogPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Views\Catalog\CatalogPanel.Designer.cs">
+      <DependentUpon>CatalogPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ShapeSelector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ShapeSelector.Designer.cs">
+      <DependentUpon>ShapeSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Themeforms\ThemeImageDeleteForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Themeforms\ThemeImageDeleteForm.Designer.cs">
+      <DependentUpon>ThemeImageDeleteForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Themeforms\ThemeImageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Themeforms\ThemeImageForm.Designer.cs">
+      <DependentUpon>ThemeImageForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Themeforms\ThemeImageFormSave.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Themeforms\ThemeImageFormSave.Designer.cs">
+      <DependentUpon>ThemeImageFormSave.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Views\DrawRoom\ChooseFloor.resx">
+      <DependentUpon>ChooseFloor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\CustomerForm.resx">
+      <DependentUpon>CustomerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\DesignPanel.resx">
+      <DependentUpon>DesignPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\InvoiceManager\InvoiceManagerForm.resx">
+      <DependentUpon>InvoiceManagerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\InvoiceManager\InvoiceManagerItem.resx">
+      <DependentUpon>InvoiceManagerItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\InvoiceManager\InvoiceManagerList.resx">
+      <DependentUpon>InvoiceManagerList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Invoice\InvoiceForm.resx">
+      <DependentUpon>InvoiceForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Invoice\InvoiceListPanel.resx">
+      <DependentUpon>InvoiceListPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Invoice\InvoiceProductPanel.resx">
+      <DependentUpon>InvoiceProductPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\RemoveProductForm.resx">
+      <DependentUpon>RemoveProductForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\RepresentativeForm.resx">
+      <DependentUpon>RepresentativeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\MainView.resx">
+      <DependentUpon>MainView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\MainMenu.resx">
+      <DependentUpon>MainMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\NewProductForm.resx">
+      <DependentUpon>NewProductForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Catalog\CatalogListPanel.resx">
+      <DependentUpon>CatalogListPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Catalog\CatalogProductPanel.resx">
+      <DependentUpon>CatalogProductPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\DrawRoom\RoomMaker.resx">
+      <DependentUpon>RoomMaker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\RotatePanel.resx">
+      <DependentUpon>RotatePanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\DrawRoom\SaveRoom.resx">
+      <DependentUpon>SaveRoom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Themeforms\ThemeForm.resx">
+      <DependentUpon>ThemeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Catalog\CatalogPanel.resx">
+      <DependentUpon>CatalogPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ShapeSelector.resx">
+      <DependentUpon>ShapeSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Themeforms\ThemeImageDeleteForm.resx">
+      <DependentUpon>ThemeImageDeleteForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Themeforms\ThemeImageForm.resx">
+      <DependentUpon>ThemeImageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Themeforms\ThemeImageFormSave.resx">
+      <DependentUpon>ThemeImageFormSave.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Background_ICT.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PingPongTafel.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Vierkant.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Cirkel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Lvorm.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bg_Metal.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Background_Metal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Background_School2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Background_Medical.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Background_Metal2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Background_Office.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Background_School.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\WoodFloor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DefaultFloor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\parket.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrowdown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ExitHover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Exit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\OranjeSofa.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\helpLabel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Bureaustoel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SmallerPlank.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\WoodFloorPlank.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DarkerPlank.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\InactiveProduct.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MouseImage.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

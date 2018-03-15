@@ -1,0 +1,57 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using KantoorApplicatie.Views.InvoiceManager;
+using KantoorApplicatie.Db;
+using KantoorApplicatie.Models.Invoice;
+using System.Drawing;
+
+namespace KantoorApplicatie.Controllers
+{
+    class InvoiceManagerController
+    {
+        // Retrieving invoices from database and making items to put in InvoiceManagerList.
+        public void FillInvoiceList(InvoiceManagerList iml)
+        {
+            var mc = new MyContext();
+            using (mc)
+            {
+                // Retrieving invoices.
+                List<InvoiceData> invoiceList = (from i in mc.invoices
+                                                 select i).ToList<InvoiceData>();
+
+                int y = 0;
+
+                // Making items to put in InvoiceManagerList.
+                foreach (InvoiceData id in invoiceList)
+                {
+                    InvoiceManagerItem item = new InvoiceManagerItem(id);
+                    item.Location = new Point(0, y);
+                    y += 105;
+                    iml.AddInvoice(item);
+                }
+            }
+        }
+
+        // Generate and save PDF to pc.
+        public void GeneratePDF(InvoiceData invoiceData, InvoiceController ic)
+        {
+            var mc = new MyContext();
+            using (mc)
+            {
+                // Retrieving the corresponding customer and representative from database.
+                Customer cus = (from i in mc.invoices
+                                where i.InvoiceDataId == invoiceData.InvoiceDataId
+                                select i.customer).Single<Customer>();
+                Representative rep = (from i in mc.invoices
+                                      where i.InvoiceDataId == invoiceData.InvoiceDataId
+                                      select i.representative).Single<Representative>();
+                // Set information and then make and PDF.
+                ic.SetInfo(cus, rep, invoiceData.InvoiceDataId.ToString());
+                ic.MakePdf();
+            };
+        }
+    }
+}

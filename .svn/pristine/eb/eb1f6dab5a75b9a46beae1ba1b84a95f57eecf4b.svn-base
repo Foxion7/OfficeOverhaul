@@ -1,0 +1,337 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using KantoorApplicatie.Models;
+using KantoorApplicatie.Models.Invoice;
+using KantoorApplicatie.Models.Theme;
+using KantoorApplicatie.Properties;
+using KantoorApplicatie.Models.Floor;
+using System.Windows.Forms;
+
+namespace KantoorApplicatie.Db {
+    public static class DatabaseController {
+
+        ///  Everything with products.
+        // Adds products into the product table inside the database.
+        public static void AddProducts(Product p)
+        {
+            using (var mc = new MyContext())
+            {
+                mc.products.Add(p);
+                mc.SaveChanges();
+            }
+        }
+
+        // Adds orderedproduct to database.
+        public static void AddOrderedProduct(OrderedProduct op) {
+            var mc = new MyContext();
+
+            using (mc) {
+                mc.orderedProducts.Add(op);
+                mc.SaveChanges();
+            }
+        }
+
+
+        // Adds customer to database.
+        public static void AddCustomer(Customer customer) {
+            var mc = new MyContext();
+            using (mc) {
+                mc.customers.Add(customer);
+                mc.SaveChanges();
+            }
+        }
+
+        // Adds room to database.
+        public static void AddRoom(Room room)
+        {
+            var mc = new MyContext();
+            using (mc)
+            {
+                FloorType floorType = (from r in mc.floorType
+                                       where r.floorTypeId == room.floorType.floorTypeId
+                                       select r).Single();
+                Room newRoom = new Room(room.width, room.height, room.shape, floorType);
+                mc.rooms.Add(newRoom);
+                mc.SaveChanges();
+            }
+            Console.WriteLine("added room");
+        }
+
+        // Adds invoice data to database.
+        public static void AddInvoice(InvoiceData invoiceData) {
+            var mc = new MyContext();
+
+            using (mc) {
+                var invoice = new InvoiceData {
+                    customer = (from c in mc.customers
+                                where c.companyName.Equals(invoiceData.customer.companyName) 
+                                && c.department.Equals(invoiceData.customer.department)
+                                && c.name.Equals(invoiceData.customer.name)
+                                select c).Single(),
+                    representative = (from r in mc.representatives
+                                      where r.RepresentativeId == invoiceData.representative.RepresentativeId
+                                      select r).Single(),
+                    room = mc.rooms.OrderByDescending(r => r.roomId).First(),
+                    invoiceDate = invoiceData.invoiceDate
+                };
+                mc.invoices.Add(invoice);
+                mc.SaveChanges();
+            }
+            Console.WriteLine("added invoice");
+        }
+
+        // Runs once if there are no products inside the database.
+        public static void AddProductsFirstRun()
+        {
+            //var mc = new MyContext();
+            //List<Product> pc = (from s in mc.products
+            //                    select s).ToList<Product>();
+            //if (pc.Count == 0)
+            //{
+            //    List<Product> productList = new List<Product> {
+            //        new Chair("Hünke Tünke", "Een fijne leren stoel", 55, 50, 49.95, Resources.Bureaustoel),
+            //        new Chair("Långfjäll", "De lichtgebogen lijnen worden versterkt door genaaide details - en zijn comfortabel en mooi om te zien. Het mechanisme om de hoogte en neiging te verstellen gaat jarenlang mee.", 67, 67, 89, Resources.Bureaustoel),
+            //        new Chair("Renberget", "Comfortabel en licht, en daardoor eenvoudig te verplaatsen. De wielen hebben een remmechanisme dat de stoel op zijn plaats houdt als je opstaat en automatisch ontgrendelt als je gaat zitten - een veilig idee.", 59, 65, 39.95, Resources.Bureaustoel),
+            //        new Chair("Flintan", "Je kan met een perfecte balans achteroverleunen omdat het schommelmechanisme de weerstand automatisch aanpast aan je gewicht en de beweging.", 74, 69, 69.95, Resources.Bureaustoel),
+            //        new Chair("Millberget", "Deze bureaustoel heeft een regelbaar schommelmechanisme waardoor je de weerstand kan aanpassen aan je bewegingen en aan je gewicht.", 52, 45, 89.95, Resources.Bureaustoel),
+            //        new Chair("Markus", "Gratis 10 jaar garantie.", 62, 60, 169, Resources.Bureaustoel),
+            //        new Chair("Volmar", "Gratis 10 jaar garantie.", 74, 74, 199, Resources.Bureaustoel),
+            //        new Chair("Kullaberg", "De bureaustoel is geïnspireerd op de ouderwetse industriële stijl, maar heeft moderne functies.", 58, 58, 49.95, Resources.Bureaustoel),
+            //        new Sofa("Knopparp", "Een kleine zitbank met een groot hart die overal perfect past, ook al is de ruimte beperkt. Geen auto? Geen probleem! De bank is zo slim verpakt dat je hem in de bus mee naar huis kan nemen.", 119, 76, 29.95, Resources.OranjeSofa),
+            //        new Sofa("Ektorp", "De geliefde zitbankserie EKTORP heeft een tijdloze vormgeving en heerlijk dikke, comfortabele kussens. De hoezen zijn eenvoudig te verwisselen, dus koop er een of twee extra, zodat je kan afwisselen naar gelang je humeur of het seizoen.", 179, 88, 299, Resources.OranjeSofa),
+            //        new Sofa("Hanke honke", "Een prachtige rooie bank", 105, 82, 74.95, Resources.OranjeSofa),
+            //        new Sofa("Kivik", "Kruip lekker weg op de comfortabele KIVIK bank. De royale afmetingen, de lage armleuningen en het memoryfoam dat zich naar het lichaam vormt, maken dat je urenlang op de bank wilt hangen, ontspannen en wegdutten.", 190, 95, 429, Resources.OranjeSofa),
+            //        new Sofa("Nockeby", "Bereid je er maar vast op voor - je vrienden blijven misschien langer dan gepland. Dikke kussens met pocketveren, een laag memoryfoam en hoge armleuningen maken de NOCKEBY bank verleidelijk comfortabel.", 203, 97, 549, Resources.OranjeSofa),
+            //        new Sofa("Norsborg", "Combineer de grootte en de vorm met de beschikbare ruimte, en geef ieder gezinslid een eigen lievelingsplek. Praktische vakken aan de zijkant zorgen ervoor dat afstandsbedieningen niet onder kussens en dekens verdwijnen.", 153, 88, 349, Resources.OranjeSofa)
+            //    };
+
+            //    using (mc)
+            //    {
+            //        foreach (Product p in productList)
+            //        {
+            //            mc.products.Add(p);
+            //        }
+            //        mc.SaveChanges();
+            //    }
+            //}
+        }
+        // Returns all products inside the database.
+        public static List<Product> GetProducts()
+        {
+            var mc = new MyContext();
+            List<Product> pc =  (from s in mc.products
+                        select s).ToList<Product>();
+            return pc;
+        }
+
+        /// Everything with theme's.
+        // Add theme's.
+        public static void AddTheme(Theme t)
+        {
+            using (var mc = new MyContext())
+            {
+                mc.themes.Add(t);
+                mc.SaveChanges();
+            }
+        }
+        // Add subTheme's
+        public static void AddSubTheme(SubTheme st)
+        {
+            using (var mc = new MyContext())
+            {
+                var subTheme = new SubTheme
+                {
+                    name = st.name,
+                    subThemeId = st.subThemeId,
+                    image = st.image,
+                    lastUsed = 0,
+                    theme = st.theme
+                    
+                };
+                mc.subThemes.Add(subTheme);
+                mc.SaveChanges();
+            }
+        }
+
+        // Get themes
+        public static List<Theme> GetThemes()
+        {
+            var mc = new MyContext();
+            List<Theme> pc = (from s in mc.themes
+                                select s).ToList<Theme>();
+            return pc;
+        }
+        // Get all subthemes
+        public static List<SubTheme> GetSubThemes()
+        {
+            var mc = new MyContext();
+            List<SubTheme> pc = (from s in mc.subThemes
+                                 select s).ToList<SubTheme>();
+            return pc;
+        }
+        // If there are no theme's add them.
+        public static void AddThemesForTheFirstRun()
+        {
+            var mc = new MyContext();
+            List<Theme> pc = (from s in mc.themes
+                                select s).ToList<Theme>();
+            if (pc.Count == 0 )
+            {
+                List<Theme> Themes = new List<Theme>
+                {
+                    new Theme("School"),
+                    new Theme("Medisch"),
+                    new Theme("Factory"),
+                    new Theme("ICT"),
+                    new Theme("Afbeeldingen")
+            };
+                List<SubTheme> subThemes = new List<SubTheme>
+                {
+                    new SubTheme("School1", Resources.Background_School1, Themes[0]),
+                    new SubTheme("School2", Resources.Background_School2, Themes[0]),
+                    new SubTheme("Medical1", Resources.Background_Medical1, Themes[1]),
+                    new SubTheme("Medical2", Resources.Background_Office, Themes[1]),
+                    new SubTheme("Factory1", Resources.Background_Metal1, Themes[2]),
+                    new SubTheme("Factory2", Resources.Background_Metal2, Themes[2]),
+                    new SubTheme("ICT1", Resources.Background_ICT, Themes[3])
+                };
+                using (mc)
+                {
+                    foreach (Theme t in Themes)
+                    {
+                        mc.themes.Add(t);
+                    }
+                    foreach (SubTheme t in subThemes)
+                    {
+                        mc.subThemes.Add(t);
+                    }
+                    mc.SaveChanges();
+                }
+            }
+        }
+        /// Everything with floors
+        // Add Floors if there are no floors in the database
+        public static void AddFloorsForFirstRun()
+        {
+            FloorMaterial wood = new FloorMaterial("Hout");
+            FloorType woodType = new FloorType("Random houtsoort", (float)19.95 ,Resources.WoodFloor);
+            FloorType woodType2 = new FloorType("Dezelfde houtsoort", (float)19.95, Resources.parket);
+            woodType.floorMaterial = wood;
+            woodType2.floorMaterial = wood;
+            FloorMaterial wood2 = new FloorMaterial("Steen");
+
+            var mc = new MyContext();
+            List<FloorMaterial> pc = (from s in mc.floorMaterial
+                                      select s).ToList<FloorMaterial>();
+            if (pc.Count == 0)
+            {
+                using (mc)
+                {
+                    mc.floorMaterial.Add(wood);
+                    mc.floorMaterial.Add(wood2);
+                    
+                    mc.floorType.Add(woodType);
+                    mc.floorType.Add(woodType2);
+                    mc.SaveChanges();
+                }
+            }
+        }
+
+        public static void clearLastUsed()
+        {
+            using (var mc = new MyContext())
+            {
+                var subTheme = (from s in mc.subThemes
+                                where s.lastUsed != 0
+                                select s).ToArray();
+                foreach (var st in subTheme)
+                {
+                    st.lastUsed = 0;
+                    mc.SaveChanges();
+                }
+            }
+        }
+
+        public static void setLastUsed(SubTheme st)
+        {
+            using (var mc = new MyContext())
+            {
+                clearLastUsed();
+                var subTheme = (from s in mc.subThemes
+                                where s.subThemeId == st.subThemeId
+                                select s).Single();
+                subTheme.lastUsed = 1;
+                mc.SaveChanges();
+            }
+        }
+
+        // Get last theme
+        public static SubTheme getLastSubTheme()
+        {
+            var mc = new MyContext();
+            List<SubTheme> st = (from s in mc.subThemes
+                           where s.lastUsed == 1
+                           select s).ToList();
+            if (st.Count > 0)
+            {
+                SubTheme Subtheme = st.First();
+                return Subtheme;
+            }
+            return null;
+        }
+
+        // Get floor material
+        public static List<FloorMaterial> GetFloorMaterial()
+        {
+            var mc = new MyContext();
+            List<FloorMaterial> pc = (from s in mc.floorMaterial
+                                      select s).ToList<FloorMaterial>();
+            return pc;
+        }
+        // Get floor type
+        public static List<FloorType> GetFloorType()
+        {
+            var mc = new MyContext();
+            List<FloorType> pc = (from s in mc.floorType
+                                      select s).ToList<FloorType>();
+            return pc;
+        }
+
+        // Get customers
+        public static List<Customer> GetCustomers() 
+        {
+            var mc = new MyContext();
+            List<Customer> c = (from s in mc.customers
+                              select s).ToList<Customer>();
+            return c;
+        }
+
+        // Get representatives
+        public static List<Representative> GetRepresentatives() 
+        {
+            var mc = new MyContext();
+            List<Representative> r = (from s in mc.representatives
+                                select s).ToList<Representative>();
+            return r;
+        }
+
+        // Get invoicedata
+        public static List<InvoiceData> GetInvoiceData() 
+        {
+            var mc = new MyContext();
+            List<InvoiceData> id = (from s in mc.invoices
+                                      select s).ToList<InvoiceData>();
+            return id;
+        }
+
+        //
+        //public void AddSomething<T>(T something)
+        //{
+        //    Console.WriteLine(something.GetType().ToString());
+        //}
+    }
+}
+

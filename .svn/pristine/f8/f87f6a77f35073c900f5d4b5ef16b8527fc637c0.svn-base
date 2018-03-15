@@ -1,0 +1,512 @@
+﻿namespace KantoorApplicatie.Views {
+    partial class InvoiceForm {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing) {
+            if (disposing && (components != null)) {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent() {
+            this.nameLabel = new System.Windows.Forms.Label();
+            this.adresLabel = new System.Windows.Forms.Label();
+            this.postalcodeLabel = new System.Windows.Forms.Label();
+            this.locationsLabel = new System.Windows.Forms.Label();
+            this.invoiceNumberLabel = new System.Windows.Forms.Label();
+            this.kvkNumberLabel = new System.Windows.Forms.Label();
+            this.ibanLabel = new System.Windows.Forms.Label();
+            this.phonenumberLabel = new System.Windows.Forms.Label();
+            this.emailLabel = new System.Windows.Forms.Label();
+            this.invoiceTitleLabel = new System.Windows.Forms.Label();
+            this.invoiceDateLabel = new System.Windows.Forms.Label();
+            this.customerDataLabel = new System.Windows.Forms.Label();
+            this.nameTextbox = new System.Windows.Forms.TextBox();
+            this.postalcodeTextbox = new System.Windows.Forms.TextBox();
+            this.locationTextbox = new System.Windows.Forms.TextBox();
+            this.adresTextbox = new System.Windows.Forms.TextBox();
+            this.phonenumberTextbox = new System.Windows.Forms.TextBox();
+            this.emailTextbox = new System.Windows.Forms.TextBox();
+            this.kvkNumberTextbox = new System.Windows.Forms.TextBox();
+            this.ibanTextbox = new System.Windows.Forms.TextBox();
+            this.intInvoiceNumberLabel = new System.Windows.Forms.Label();
+            this.dateInvoiceDateLabel = new System.Windows.Forms.Label();
+            this.productPriceTotalLabel = new System.Windows.Forms.Label();
+            this.productPriceAPieceLabel = new System.Windows.Forms.Label();
+            this.productAmountLabel = new System.Windows.Forms.Label();
+            this.productNameLabel = new System.Windows.Forms.Label();
+            this.invoiceTotalPriceLabel = new System.Windows.Forms.Label();
+            this.intInvoiceTotalPriceLabelprijsLabel = new System.Windows.Forms.Label();
+            this.generateButton = new System.Windows.Forms.Button();
+            this.customerComboBox = new System.Windows.Forms.ComboBox();
+            this.existingCustomersLabel = new System.Windows.Forms.Label();
+            this.companyNameLabel = new System.Windows.Forms.Label();
+            this.companyNameTextbox = new System.Windows.Forms.TextBox();
+            this.departmentLabel = new System.Windows.Forms.Label();
+            this.departmentTextbox = new System.Windows.Forms.TextBox();
+            this.invoiceListPanel1 = new KantoorApplicatie.Views.Invoice.InvoiceListPanel();
+            this.SuspendLayout();
+            // 
+            // nameLabel
+            // 
+            this.nameLabel.AutoSize = true;
+            this.nameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nameLabel.Location = new System.Drawing.Point(93, 135);
+            this.nameLabel.Name = "nameLabel";
+            this.nameLabel.Size = new System.Drawing.Size(49, 17);
+            this.nameLabel.TabIndex = 2;
+            this.nameLabel.Text = "Naam:";
+            // 
+            // adresLabel
+            // 
+            this.adresLabel.AutoSize = true;
+            this.adresLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.adresLabel.Location = new System.Drawing.Point(328, 105);
+            this.adresLabel.Name = "adresLabel";
+            this.adresLabel.Size = new System.Drawing.Size(49, 17);
+            this.adresLabel.TabIndex = 3;
+            this.adresLabel.Text = "Adres:";
+            // 
+            // postalcodeLabel
+            // 
+            this.postalcodeLabel.AutoSize = true;
+            this.postalcodeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.postalcodeLabel.Location = new System.Drawing.Point(71, 188);
+            this.postalcodeLabel.Name = "postalcodeLabel";
+            this.postalcodeLabel.Size = new System.Drawing.Size(71, 17);
+            this.postalcodeLabel.TabIndex = 4;
+            this.postalcodeLabel.Text = "Postcode:";
+            // 
+            // locationsLabel
+            // 
+            this.locationsLabel.AutoSize = true;
+            this.locationsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.locationsLabel.Location = new System.Drawing.Point(27, 214);
+            this.locationsLabel.Name = "locationsLabel";
+            this.locationsLabel.Size = new System.Drawing.Size(115, 17);
+            this.locationsLabel.TabIndex = 5;
+            this.locationsLabel.Text = "Vestigingsplaats:";
+            // 
+            // invoiceNumberLabel
+            // 
+            this.invoiceNumberLabel.AutoSize = true;
+            this.invoiceNumberLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.invoiceNumberLabel.Location = new System.Drawing.Point(5, 244);
+            this.invoiceNumberLabel.Name = "invoiceNumberLabel";
+            this.invoiceNumberLabel.Size = new System.Drawing.Size(111, 17);
+            this.invoiceNumberLabel.TabIndex = 6;
+            this.invoiceNumberLabel.Text = "Factuurnummer:";
+            // 
+            // kvkNumberLabel
+            // 
+            this.kvkNumberLabel.AutoSize = true;
+            this.kvkNumberLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.kvkNumberLabel.Location = new System.Drawing.Point(283, 185);
+            this.kvkNumberLabel.Name = "kvkNumberLabel";
+            this.kvkNumberLabel.Size = new System.Drawing.Size(93, 17);
+            this.kvkNumberLabel.TabIndex = 13;
+            this.kvkNumberLabel.Text = "KvK-nummer:";
+            // 
+            // ibanLabel
+            // 
+            this.ibanLabel.AutoSize = true;
+            this.ibanLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ibanLabel.Location = new System.Drawing.Point(333, 211);
+            this.ibanLabel.Name = "ibanLabel";
+            this.ibanLabel.Size = new System.Drawing.Size(43, 17);
+            this.ibanLabel.TabIndex = 16;
+            this.ibanLabel.Text = "IBAN:";
+            // 
+            // phonenumberLabel
+            // 
+            this.phonenumberLabel.AutoSize = true;
+            this.phonenumberLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.phonenumberLabel.Location = new System.Drawing.Point(257, 132);
+            this.phonenumberLabel.Name = "phonenumberLabel";
+            this.phonenumberLabel.Size = new System.Drawing.Size(119, 17);
+            this.phonenumberLabel.TabIndex = 18;
+            this.phonenumberLabel.Text = "Telefoonnummer:";
+            // 
+            // emailLabel
+            // 
+            this.emailLabel.AutoSize = true;
+            this.emailLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.emailLabel.Location = new System.Drawing.Point(289, 158);
+            this.emailLabel.Name = "emailLabel";
+            this.emailLabel.Size = new System.Drawing.Size(87, 17);
+            this.emailLabel.TabIndex = 19;
+            this.emailLabel.Text = "E-mailadres:";
+            // 
+            // invoiceTitleLabel
+            // 
+            this.invoiceTitleLabel.AutoSize = true;
+            this.invoiceTitleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.invoiceTitleLabel.Location = new System.Drawing.Point(12, 9);
+            this.invoiceTitleLabel.Name = "invoiceTitleLabel";
+            this.invoiceTitleLabel.Size = new System.Drawing.Size(132, 39);
+            this.invoiceTitleLabel.TabIndex = 21;
+            this.invoiceTitleLabel.Text = "Factuur";
+            // 
+            // invoiceDateLabel
+            // 
+            this.invoiceDateLabel.AutoSize = true;
+            this.invoiceDateLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.invoiceDateLabel.Location = new System.Drawing.Point(17, 261);
+            this.invoiceDateLabel.Name = "invoiceDateLabel";
+            this.invoiceDateLabel.Size = new System.Drawing.Size(99, 17);
+            this.invoiceDateLabel.TabIndex = 22;
+            this.invoiceDateLabel.Text = "Factuurdatum:";
+            // 
+            // customerDataLabel
+            // 
+            this.customerDataLabel.AutoSize = true;
+            this.customerDataLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customerDataLabel.Location = new System.Drawing.Point(9, 50);
+            this.customerDataLabel.Name = "customerDataLabel";
+            this.customerDataLabel.Size = new System.Drawing.Size(143, 25);
+            this.customerDataLabel.TabIndex = 26;
+            this.customerDataLabel.Text = "Klantgegevens";
+            // 
+            // nameTextbox
+            // 
+            this.nameTextbox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.nameTextbox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.nameTextbox.Location = new System.Drawing.Point(149, 132);
+            this.nameTextbox.Margin = new System.Windows.Forms.Padding(4);
+            this.nameTextbox.Name = "nameTextbox";
+            this.nameTextbox.Size = new System.Drawing.Size(100, 20);
+            this.nameTextbox.TabIndex = 27;
+            // 
+            // postalcodeTextbox
+            // 
+            this.postalcodeTextbox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.postalcodeTextbox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.postalcodeTextbox.Location = new System.Drawing.Point(149, 185);
+            this.postalcodeTextbox.Margin = new System.Windows.Forms.Padding(4);
+            this.postalcodeTextbox.Name = "postalcodeTextbox";
+            this.postalcodeTextbox.Size = new System.Drawing.Size(100, 20);
+            this.postalcodeTextbox.TabIndex = 29;
+            // 
+            // locationTextbox
+            // 
+            this.locationTextbox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.locationTextbox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.locationTextbox.Location = new System.Drawing.Point(149, 211);
+            this.locationTextbox.Margin = new System.Windows.Forms.Padding(4);
+            this.locationTextbox.Name = "locationTextbox";
+            this.locationTextbox.Size = new System.Drawing.Size(100, 20);
+            this.locationTextbox.TabIndex = 30;
+            // 
+            // adresTextbox
+            // 
+            this.adresTextbox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.adresTextbox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.adresTextbox.Location = new System.Drawing.Point(383, 105);
+            this.adresTextbox.Name = "adresTextbox";
+            this.adresTextbox.Size = new System.Drawing.Size(100, 20);
+            this.adresTextbox.TabIndex = 31;
+            // 
+            // phonenumberTextbox
+            // 
+            this.phonenumberTextbox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.phonenumberTextbox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.phonenumberTextbox.Location = new System.Drawing.Point(383, 132);
+            this.phonenumberTextbox.Margin = new System.Windows.Forms.Padding(4);
+            this.phonenumberTextbox.Name = "phonenumberTextbox";
+            this.phonenumberTextbox.Size = new System.Drawing.Size(100, 20);
+            this.phonenumberTextbox.TabIndex = 36;
+            // 
+            // emailTextbox
+            // 
+            this.emailTextbox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.emailTextbox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.emailTextbox.Location = new System.Drawing.Point(383, 158);
+            this.emailTextbox.Margin = new System.Windows.Forms.Padding(4);
+            this.emailTextbox.Name = "emailTextbox";
+            this.emailTextbox.Size = new System.Drawing.Size(100, 20);
+            this.emailTextbox.TabIndex = 37;
+            // 
+            // kvkNumberTextbox
+            // 
+            this.kvkNumberTextbox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.kvkNumberTextbox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.kvkNumberTextbox.Location = new System.Drawing.Point(384, 185);
+            this.kvkNumberTextbox.Margin = new System.Windows.Forms.Padding(4);
+            this.kvkNumberTextbox.Name = "kvkNumberTextbox";
+            this.kvkNumberTextbox.Size = new System.Drawing.Size(100, 20);
+            this.kvkNumberTextbox.TabIndex = 38;
+            // 
+            // ibanTextbox
+            // 
+            this.ibanTextbox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.ibanTextbox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.ibanTextbox.Location = new System.Drawing.Point(384, 211);
+            this.ibanTextbox.Margin = new System.Windows.Forms.Padding(4);
+            this.ibanTextbox.Name = "ibanTextbox";
+            this.ibanTextbox.Size = new System.Drawing.Size(100, 20);
+            this.ibanTextbox.TabIndex = 40;
+            // 
+            // intInvoiceNumberLabel
+            // 
+            this.intInvoiceNumberLabel.AutoSize = true;
+            this.intInvoiceNumberLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.intInvoiceNumberLabel.Location = new System.Drawing.Point(119, 244);
+            this.intInvoiceNumberLabel.Name = "intInvoiceNumberLabel";
+            this.intInvoiceNumberLabel.Size = new System.Drawing.Size(56, 17);
+            this.intInvoiceNumberLabel.TabIndex = 41;
+            this.intInvoiceNumberLabel.Text = "[00000]";
+            // 
+            // dateInvoiceDateLabel
+            // 
+            this.dateInvoiceDateLabel.AutoSize = true;
+            this.dateInvoiceDateLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateInvoiceDateLabel.Location = new System.Drawing.Point(119, 261);
+            this.dateInvoiceDateLabel.Name = "dateInvoiceDateLabel";
+            this.dateInvoiceDateLabel.Size = new System.Drawing.Size(72, 17);
+            this.dateInvoiceDateLabel.TabIndex = 42;
+            this.dateInvoiceDateLabel.Text = "[01/01/17]";
+            // 
+            // productPriceTotalLabel
+            // 
+            this.productPriceTotalLabel.AutoSize = true;
+            this.productPriceTotalLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.productPriceTotalLabel.Location = new System.Drawing.Point(530, 288);
+            this.productPriceTotalLabel.Name = "productPriceTotalLabel";
+            this.productPriceTotalLabel.Size = new System.Drawing.Size(43, 13);
+            this.productPriceTotalLabel.TabIndex = 25;
+            this.productPriceTotalLabel.Text = "Totaal";
+            // 
+            // productPriceAPieceLabel
+            // 
+            this.productPriceAPieceLabel.AutoSize = true;
+            this.productPriceAPieceLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.productPriceAPieceLabel.Location = new System.Drawing.Point(372, 288);
+            this.productPriceAPieceLabel.Name = "productPriceAPieceLabel";
+            this.productPriceAPieceLabel.Size = new System.Drawing.Size(56, 13);
+            this.productPriceAPieceLabel.TabIndex = 24;
+            this.productPriceAPieceLabel.Text = "Stukprijs";
+            // 
+            // productAmountLabel
+            // 
+            this.productAmountLabel.AutoSize = true;
+            this.productAmountLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.productAmountLabel.Location = new System.Drawing.Point(206, 288);
+            this.productAmountLabel.Name = "productAmountLabel";
+            this.productAmountLabel.Size = new System.Drawing.Size(43, 13);
+            this.productAmountLabel.TabIndex = 23;
+            this.productAmountLabel.Text = "Aantal";
+            // 
+            // productNameLabel
+            // 
+            this.productNameLabel.AutoSize = true;
+            this.productNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.productNameLabel.Location = new System.Drawing.Point(37, 288);
+            this.productNameLabel.Name = "productNameLabel";
+            this.productNameLabel.Size = new System.Drawing.Size(39, 13);
+            this.productNameLabel.TabIndex = 8;
+            this.productNameLabel.Text = "Naam";
+            // 
+            // invoiceTotalPriceLabel
+            // 
+            this.invoiceTotalPriceLabel.AutoSize = true;
+            this.invoiceTotalPriceLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.invoiceTotalPriceLabel.Location = new System.Drawing.Point(492, 471);
+            this.invoiceTotalPriceLabel.Name = "invoiceTotalPriceLabel";
+            this.invoiceTotalPriceLabel.Size = new System.Drawing.Size(70, 13);
+            this.invoiceTotalPriceLabel.TabIndex = 44;
+            this.invoiceTotalPriceLabel.Text = "Totaalprijs:";
+            // 
+            // intInvoiceTotalPriceLabelprijsLabel
+            // 
+            this.intInvoiceTotalPriceLabelprijsLabel.AutoSize = true;
+            this.intInvoiceTotalPriceLabelprijsLabel.Location = new System.Drawing.Point(568, 471);
+            this.intInvoiceTotalPriceLabelprijsLabel.Name = "intInvoiceTotalPriceLabelprijsLabel";
+            this.intInvoiceTotalPriceLabelprijsLabel.Size = new System.Drawing.Size(28, 13);
+            this.intInvoiceTotalPriceLabelprijsLabel.TabIndex = 45;
+            this.intInvoiceTotalPriceLabelprijsLabel.Text = "0,00";
+            // 
+            // generateButton
+            // 
+            this.generateButton.Location = new System.Drawing.Point(28, 471);
+            this.generateButton.Margin = new System.Windows.Forms.Padding(2);
+            this.generateButton.Name = "generateButton";
+            this.generateButton.Size = new System.Drawing.Size(63, 19);
+            this.generateButton.TabIndex = 46;
+            this.generateButton.Text = "Genereer";
+            this.generateButton.UseVisualStyleBackColor = true;
+            this.generateButton.Click += new System.EventHandler(this.generateButton_Click);
+            // 
+            // customerComboBox
+            // 
+            this.customerComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.customerComboBox.DropDownWidth = 80;
+            this.customerComboBox.FormattingEnabled = true;
+            this.customerComboBox.Location = new System.Drawing.Point(149, 78);
+            this.customerComboBox.MinimumSize = new System.Drawing.Size(100, 0);
+            this.customerComboBox.Name = "customerComboBox";
+            this.customerComboBox.Size = new System.Drawing.Size(100, 21);
+            this.customerComboBox.TabIndex = 48;
+            this.customerComboBox.SelectedIndexChanged += new System.EventHandler(this.customerComboBox_SelectedIndexChanged);
+            this.customerComboBox.Format += new System.Windows.Forms.ListControlConvertEventHandler(this.ExistingCustomersFormat);
+            this.customerComboBox.Click += new System.EventHandler(this.customerComboBox_Click);
+            // 
+            // existingCustomersLabel
+            // 
+            this.existingCustomersLabel.AutoSize = true;
+            this.existingCustomersLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.existingCustomersLabel.Location = new System.Drawing.Point(13, 82);
+            this.existingCustomersLabel.Name = "existingCustomersLabel";
+            this.existingCustomersLabel.Size = new System.Drawing.Size(130, 17);
+            this.existingCustomersLabel.TabIndex = 49;
+            this.existingCustomersLabel.Text = "Bestaande klanten:";
+            // 
+            // companyNameLabel
+            // 
+            this.companyNameLabel.AutoSize = true;
+            this.companyNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.companyNameLabel.Location = new System.Drawing.Point(49, 109);
+            this.companyNameLabel.Name = "companyNameLabel";
+            this.companyNameLabel.Size = new System.Drawing.Size(94, 17);
+            this.companyNameLabel.TabIndex = 50;
+            this.companyNameLabel.Text = "Bedrijfsnaam:";
+            // 
+            // companyNameTextbox
+            // 
+            this.companyNameTextbox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.companyNameTextbox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.companyNameTextbox.Location = new System.Drawing.Point(149, 106);
+            this.companyNameTextbox.Name = "companyNameTextbox";
+            this.companyNameTextbox.Size = new System.Drawing.Size(100, 20);
+            this.companyNameTextbox.TabIndex = 26;
+            // 
+            // departmentLabel
+            // 
+            this.departmentLabel.AutoSize = true;
+            this.departmentLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.departmentLabel.Location = new System.Drawing.Point(81, 161);
+            this.departmentLabel.Name = "departmentLabel";
+            this.departmentLabel.Size = new System.Drawing.Size(63, 17);
+            this.departmentLabel.TabIndex = 52;
+            this.departmentLabel.Text = "Afdeling:";
+            // 
+            // departmentTextbox
+            // 
+            this.departmentTextbox.Location = new System.Drawing.Point(150, 158);
+            this.departmentTextbox.Name = "departmentTextbox";
+            this.departmentTextbox.Size = new System.Drawing.Size(100, 20);
+            this.departmentTextbox.TabIndex = 28;
+            // 
+            // invoiceListPanel1
+            // 
+            this.invoiceListPanel1.AutoScroll = true;
+            this.invoiceListPanel1.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.invoiceListPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.invoiceListPanel1.Location = new System.Drawing.Point(14, 308);
+            this.invoiceListPanel1.Margin = new System.Windows.Forms.Padding(5);
+            this.invoiceListPanel1.Name = "invoiceListPanel1";
+            this.invoiceListPanel1.Size = new System.Drawing.Size(609, 158);
+            this.invoiceListPanel1.TabIndex = 43;
+            // 
+            // InvoiceForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.ClientSize = new System.Drawing.Size(637, 493);
+            this.Controls.Add(this.departmentTextbox);
+            this.Controls.Add(this.departmentLabel);
+            this.Controls.Add(this.companyNameTextbox);
+            this.Controls.Add(this.companyNameLabel);
+            this.Controls.Add(this.existingCustomersLabel);
+            this.Controls.Add(this.customerComboBox);
+            this.Controls.Add(this.generateButton);
+            this.Controls.Add(this.intInvoiceTotalPriceLabelprijsLabel);
+            this.Controls.Add(this.invoiceTotalPriceLabel);
+            this.Controls.Add(this.invoiceListPanel1);
+            this.Controls.Add(this.dateInvoiceDateLabel);
+            this.Controls.Add(this.intInvoiceNumberLabel);
+            this.Controls.Add(this.ibanTextbox);
+            this.Controls.Add(this.kvkNumberTextbox);
+            this.Controls.Add(this.emailTextbox);
+            this.Controls.Add(this.phonenumberTextbox);
+            this.Controls.Add(this.adresTextbox);
+            this.Controls.Add(this.locationTextbox);
+            this.Controls.Add(this.postalcodeTextbox);
+            this.Controls.Add(this.nameTextbox);
+            this.Controls.Add(this.customerDataLabel);
+            this.Controls.Add(this.productPriceTotalLabel);
+            this.Controls.Add(this.productPriceAPieceLabel);
+            this.Controls.Add(this.productAmountLabel);
+            this.Controls.Add(this.invoiceDateLabel);
+            this.Controls.Add(this.invoiceTitleLabel);
+            this.Controls.Add(this.emailLabel);
+            this.Controls.Add(this.phonenumberLabel);
+            this.Controls.Add(this.ibanLabel);
+            this.Controls.Add(this.kvkNumberLabel);
+            this.Controls.Add(this.productNameLabel);
+            this.Controls.Add(this.invoiceNumberLabel);
+            this.Controls.Add(this.locationsLabel);
+            this.Controls.Add(this.postalcodeLabel);
+            this.Controls.Add(this.adresLabel);
+            this.Controls.Add(this.nameLabel);
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Name = "InvoiceForm";
+            this.Text = "InvoiceForm";
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+        private System.Windows.Forms.Label nameLabel;
+        private System.Windows.Forms.Label adresLabel;
+        private System.Windows.Forms.Label postalcodeLabel;
+        private System.Windows.Forms.Label locationsLabel;
+        private System.Windows.Forms.Label invoiceNumberLabel;
+        private System.Windows.Forms.Label kvkNumberLabel;
+        private System.Windows.Forms.Label ibanLabel;
+        private System.Windows.Forms.Label phonenumberLabel;
+        private System.Windows.Forms.Label emailLabel;
+        private System.Windows.Forms.Label invoiceTitleLabel;
+        private System.Windows.Forms.Label invoiceDateLabel;
+        private System.Windows.Forms.Label customerDataLabel;
+        private System.Windows.Forms.TextBox nameTextbox;
+        private System.Windows.Forms.TextBox postalcodeTextbox;
+        private System.Windows.Forms.TextBox locationTextbox;
+        private System.Windows.Forms.TextBox adresTextbox;
+        private System.Windows.Forms.TextBox phonenumberTextbox;
+        private System.Windows.Forms.TextBox emailTextbox;
+        private System.Windows.Forms.TextBox kvkNumberTextbox;
+        private System.Windows.Forms.TextBox ibanTextbox;
+        private System.Windows.Forms.Label intInvoiceNumberLabel;
+        private System.Windows.Forms.Label dateInvoiceDateLabel;
+        private System.Windows.Forms.Label productPriceTotalLabel;
+        private System.Windows.Forms.Label productPriceAPieceLabel;
+        private System.Windows.Forms.Label productAmountLabel;
+        private System.Windows.Forms.Label productNameLabel;
+        private Invoice.InvoiceListPanel invoiceListPanel1;
+        private System.Windows.Forms.Label invoiceTotalPriceLabel;
+        private System.Windows.Forms.Label intInvoiceTotalPriceLabelprijsLabel;
+        private System.Windows.Forms.Button generateButton;
+        private System.Windows.Forms.ComboBox customerComboBox;
+        private System.Windows.Forms.Label existingCustomersLabel;
+        private System.Windows.Forms.Label companyNameLabel;
+        private System.Windows.Forms.TextBox companyNameTextbox;
+        private System.Windows.Forms.Label departmentLabel;
+        private System.Windows.Forms.TextBox departmentTextbox;
+    }
+}

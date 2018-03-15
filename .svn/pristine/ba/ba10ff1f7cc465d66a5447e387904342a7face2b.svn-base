@@ -1,0 +1,167 @@
+﻿using System;
+using KantoorApplicatie.Models;
+using KantoorApplicatie.Models.Floor;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using KantoorApplicatie.Controllers;
+using KantoorApplicatie.Db;
+
+namespace KantoorApplicatie.Views
+{
+    public partial class ShapeSelector : Form
+    {
+        //private List<FloorMaterial> floorMaterials;
+        //private List<FloorType> floorTypes;
+        private List<FloorType> tempFloorType;
+        private Bitmap square, circle, lShape;
+        private int height=0, width=0;
+        private string shape = "";
+        private Room r;
+        public ShapeSelector(Room r)
+        {
+            InitializeComponent();
+            if (DatabaseController.getLastSubTheme() != null)
+            {
+                this.BackgroundImageLayout = ImageLayout.Stretch;
+                this.BackgroundImage = Converter.ByteArrayToImage(DatabaseController.getLastSubTheme().image);
+            }
+            //this.floorMaterials = floorMaterials;
+            //this.floorTypes = floorTypes;
+            // add floor materials to combo box
+            foreach (FloorMaterial material in DatabaseController.floorMaterialList)
+            {
+                floorMaterialComboBox.Items.Add(material.name);
+            }
+
+            square = Properties.Resources.Vierkant;
+            circle = Properties.Resources.Cirkel;
+            lShape = Properties.Resources.Lvorm;
+            txtHeight.Text = height.ToString();
+            txtWidth.Text = width.ToString();
+            squareBox.Image = square;
+            circleBox.Image = circle;
+            txtHeight.Text = "500";
+            txtWidth.Text = "500";
+            this.r = r;
+        }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            floorMaterialComboBox.SelectedIndex = 0;
+            floorTypeComboBox.SelectedIndex = 0;
+        }
+
+        // Accept enter as an ok button.
+        private void txtHeight_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                ButtonOk_Click(sender, e);
+        }
+
+        private void txtWidth_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                ButtonOk_Click(sender, e);
+        }
+        // Accept clicking on images.
+        private void squareBox_Click(object sender, EventArgs e)
+        {
+            radioSquare.Checked = true;
+        }
+
+        private void circleBox_Click(object sender, EventArgs e)
+        {
+            radioCircle.Checked = true;
+        }
+        // Makes a combobox of all kinds of floortypes for the selected floor material.
+        private void floorMaterialComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Resets the floortype combobox and picturebox when a new material is selected.
+            if(floorTypeComboBox.Items.Count > 0)
+            {
+                floorTypeComboBox.ResetText();
+            }
+            floorTypeComboBox.Items.Clear();
+            floorPictureBox.Image = null;
+            // Find all floortypes of the selected floormaterial.
+            tempFloorType = DatabaseController.floorTypeList.FindAll(v => v.floorMaterial.name == floorMaterialComboBox.SelectedItem.ToString());
+            // Fill the combobox of floorype
+            foreach (FloorType type in tempFloorType)
+            {
+                floorTypeComboBox.Items.Add(type.name);
+            }
+            // Change selected floortype.
+            if(tempFloorType.Count > 0)
+            {
+                floorTypeComboBox.SelectedIndex = 0;
+            }
+
+        }
+
+        // Shows the image of the selected floortype.
+        private void floorTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Bitmap image = tempFloorType.Find(v => v.name == floorTypeComboBox.SelectedItem.ToString()).GetImage();
+            floorPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+            floorPictureBox.Image = image;
+            priceLabel.Text = "€"+tempFloorType.Find(v => v.name == floorTypeComboBox.SelectedItem.ToString()).price.ToString() + "  / m2";
+        }
+
+        // Check which radiobutton has been checked, then returns a string value of the shape.
+        private string CheckRadio()
+        {
+            if (radioSquare.Checked)
+            {
+                return "Square";
+            }
+            else if (radioCircle.Checked)
+            {
+                return "Circle";
+            }
+            else
+            {
+                return "";
+            }
+        }
+        private void ButtonOk_Click(object sender, EventArgs e)
+        {
+            // Check if the text is number
+            if (Int32.TryParse(txtHeight.Text, out height) && Int32.TryParse(txtWidth.Text, out width))
+            {
+                // Check if number is bigger then 0
+                if(!(height <= 0 || width <= 0))
+                {
+                    shape = CheckRadio();
+                    r.shape = shape;
+                    r.height = height;
+                    r.width = width;
+                    if (floorPictureBox.Image != null)
+                    {
+                        r.floorType = tempFloorType.Find(v => v.name == floorTypeComboBox.SelectedItem.ToString());
+                    }
+                    DialogResult = DialogResult.OK;
+                    Close(); 
+                }
+                else
+                {
+                    errorMsg.Text = "De waarde moet groter zijn dan 0";
+                }
+            }
+            else
+            {
+                errorMsg.Text = "Lengte en/of breedte moet een getal zijn";
+            }
+        }
+        private void ButtonCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+    }
+}

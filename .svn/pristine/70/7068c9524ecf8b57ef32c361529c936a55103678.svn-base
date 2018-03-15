@@ -1,0 +1,237 @@
+﻿using KantoorApplicatie.Models;
+using KantoorApplicatie.Views;
+using KantoorApplicatie.Views.Invoice;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using PdfSharp;
+using PdfSharp.Drawing;
+using PdfSharp.Pdf;
+using PdfSharp.Pdf.IO;
+using System.Diagnostics;
+using KantoorApplicatie.Models.Invoice;
+
+namespace KantoorApplicatie.Controllers
+{
+    public class InvoiceController
+    {
+        InvoiceListPanel ilp;
+        public List<Product> productList;
+        public List<InvoiceProductPanel> productPanelList { get; set; }
+        public double totalPrice { get; set; }
+        private Customer customer;
+        private Representative representative;
+        private string invoiceNumber;
+        private Room room;
+
+        public InvoiceController(InvoiceListPanel ilp, List<Product> productList)
+        {
+            this.productList = productList;
+            this.ilp = ilp;
+            productPanelList = new List<InvoiceProductPanel>();
+        }
+
+        // Filling productlist when an invoice is being saved from InvoiceManagerItem.
+        public InvoiceController(ICollection<OrderedProduct> orderedProducts)
+        {
+            MakeProductListFromOrderedProducts(orderedProducts);
+        }
+
+        public void MakeProductListFromOrderedProducts(ICollection<OrderedProduct> orderedProducts)
+        {
+            if (orderedProducts != null)
+            {
+                productList = new List<Product>();
+                foreach (OrderedProduct p in orderedProducts)
+                {
+                    for (int i = 0; i < p.amount; i++)
+                    {
+                        productList.Add(p.product);
+                    }
+                }
+            }
+        }
+
+       // Fills displayed productslist with current product, their amounts and prices.
+        public void FillDisplayedProductList()
+        {
+            totalPrice = 0;
+
+            // Puts productId's and their respective amounts  into sorted.
+            var sorted =
+                productList.GroupBy(x => x.productId)
+                .Select(g => new { Value = g.Key, Count = g.Count() })
+                .OrderByDescending(x => x.Count);
+
+            Point newLocation = new Point(0, 0);
+            foreach (var x in sorted)
+            {
+                Product p = productList.Find(item => item.productId == x.Value);
+                totalPrice += (p.price * x.Count);
+                InvoiceProductPanel ipp = new InvoiceProductPanel(p);
+                ipp.SetRemainingValues(x.Count, newLocation);
+                ilp.AddProduct(ipp);
+                newLocation.Y += ipp.Height;
+                productPanelList.Add(ipp);
+            }
+        }
+
+        // Clears displayed products.
+        private void ClearDisplayedProductList()
+        {
+            foreach (InvoiceProductPanel ipp in productPanelList)
+            {
+                ilp.RemoveProduct(ipp);
+            }
+            productPanelList.Clear();
+        }
+
+        // Set information for PDF.
+        public void SetInfo(Customer cus, Representative rep, string number, Room room)
+        {
+            customer = cus;
+            representative = rep;
+            invoiceNumber = number;
+            this.room = room;
+        }
+
+        // Set information for PDF.
+        public void SetInfo(Customer cus, Representative rep, string number)
+        {
+            customer = cus;
+            representative = rep;
+            invoiceNumber = number;
+        }
+
+        // Make PDF and save it to selected location.
+        public void MakePdf()
+        {
+            PdfDocument doc = new PdfDocument();
+            PdfPage page = doc.AddPage();
+            XGraphics gfx = XGraphics.FromPdfPage(page);
+            DateTime date = DateTime.Today;
+            string dateAndNumber = date.Date.ToString("d") + ", factuurnummer: " + invoiceNumber;
+            // Draw the text
+            DrawPDF(gfx, dateAndNumber);
+            // Save the document.
+            string filePath = "";
+            // Select folder for file to save in.
+            FolderBrowserDialog fdd = new FolderBrowserDialog();
+            if (fdd.ShowDialog() == DialogResult.OK)
+            {
+                filePath = fdd.SelectedPath.ToString();
+            }
+            string filename = String.Format("factuur{0}_{1}.pdf", invoiceNumber, date.Date.ToString("d"));
+            doc.Save(filePath + "/" + filename);
+        }
+
+        // Draw information and products onto PDF.
+        public void DrawPDF(XGraphics gfx, string dateAndNumber)
+        {
+            // Create fonts.
+            XFont fontTitle = new XFont("Verdana", 15, XFontStyle.Bold);
+            XFont fontText = new XFont("Verdana", 10, XFontStyle.Regular);
+            XFont fontBoldText = new XFont("Verdana", 10, XFontStyle.Bold);
+
+            XPen pen = new XPen(XColor.FromKnownColor(KnownColor.Black));
+
+            // Draw outlines.
+            gfx.DrawString(dateAndNumber, fontBoldText, XBrushes.Black, 60, 40);
+            gfx.DrawLine(pen, new Point(40, 60), new Point(555, 60));
+            gfx.DrawLine(pen, new Point(40, 280), new Point(555, 280));
+            gfx.DrawLine(pen, new Point(297, 60), new Point(297, 280));
+            gfx.DrawString("Factuur", fontTitle, XBrushes.Black, 267, 300);
+            gfx.DrawLine(pen, new Point(40, 310), new Point(555, 310));
+            gfx.DrawString("Producten", fontTitle, XBrushes.Black, 60, 335);
+            gfx.DrawString("Naam", fontBoldText, XBrushes.Black, 60, 355);
+            gfx.DrawString("Aantal", fontBoldText, XBrushes.Black, 350, 355);
+            gfx.DrawString("Prijs", fontBoldText, XBrushes.Black, 425, 355);
+            gfx.DrawString("Totaal", fontBoldText, XBrushes.Black, 500, 355);
+
+            // Draw customer info.
+            gfx.DrawString("Klant:", fontTitle, XBrushes.Black, 60, 90);
+            gfx.DrawString(customer.companyName, fontText, XBrushes.Black, 60, 110);
+            gfx.DrawString(customer.name, fontText, XBrushes.Black, 60, 130);
+            gfx.DrawString(customer.postalCode, fontText, XBrushes.Black, 60, 150);
+            gfx.DrawString(customer.location, fontText, XBrushes.Black, 60, 170);
+            gfx.DrawString(customer.adres, fontText, XBrushes.Black, 60, 190);
+            gfx.DrawString(customer.phonenumber, fontText, XBrushes.Black, 60, 210);
+            gfx.DrawString(customer.email, fontText, XBrushes.Black, 60, 230);
+            gfx.DrawString(customer.kvkNumber, fontText, XBrushes.Black, 60, 250);
+            gfx.DrawString(customer.iban, fontText, XBrushes.Black, 60, 270);
+
+            // Draw user info.
+            gfx.DrawString("Vertegenwoordiger:", fontTitle, XBrushes.Black, 317, 90);
+            gfx.DrawString(representative.companyName, fontText, XBrushes.Black, 317, 110);
+            gfx.DrawString(representative.postalCode, fontText, XBrushes.Black, 317, 130);
+            gfx.DrawString(representative.location, fontText, XBrushes.Black, 317, 150);
+            gfx.DrawString(representative.phonenumber.ToString(), fontText, XBrushes.Black, 317, 170);
+            gfx.DrawString(representative.emailadres, fontText, XBrushes.Black, 317, 190);
+            gfx.DrawString(representative.kvkNumber.ToString(), fontText, XBrushes.Black, 317, 210);
+            gfx.DrawString(representative.iban, fontText, XBrushes.Black, 317, 230);
+
+            // Draw products.
+            if(productList != null)
+            {
+                var sorted =
+                    productList.GroupBy(x => x.productId)
+                    .Select(g => new { Value = g.Key, Count = g.Count(), Name = productList.Find(v => v.productId == g.Key).name, Price = productList.Find(v => v.productId == g.Key).price })
+                    .OrderByDescending(x => x.Count);
+                int productY = 375;
+                double totPrijs = 0;
+                foreach (var p in sorted)
+                {
+                    // Draw name.
+                    gfx.DrawString(p.Name, fontText, XBrushes.Black,
+                        60, productY);
+                    // Draw number.
+                    gfx.DrawString(p.Count.ToString(), fontText, XBrushes.Black,
+                        350, productY);
+                    // Draw price.
+                    gfx.DrawString("€" + p.Price, fontText, XBrushes.Black,
+                        425, productY);
+                    // Draw total.
+                    gfx.DrawString("€" + (p.Count * p.Price), fontText, XBrushes.Black,
+                        500, productY);
+                    productY += 20;
+                    totPrijs += p.Count * p.Price;
+                }
+
+                if(room != null)
+                {
+                    // Draw floor.
+                    double squareM = 0;
+                    // Calculate square meters of room
+                    if (room.shape == "Circle")
+                    {
+                        squareM = Math.Round((Math.PI * (room.width / 2) * (room.width / 2) / 10000), 0);
+                    }
+                    else
+                    {
+                        squareM = (room.width / 100) * (room.height / 100);
+                    }
+                    // Calculate price.
+                    double prijs = Math.Round((squareM * room.floorType.price), 2);
+                    // Add to total price.
+                    totPrijs += prijs;
+                    gfx.DrawString("Vloer", fontBoldText, XBrushes.Black, 60, productY + 20);
+                    gfx.DrawString("Aantal m2", fontBoldText, XBrushes.Black, 350, productY + 20);
+                    gfx.DrawString("Prijs/m2", fontBoldText, XBrushes.Black, 425, productY + 20);
+                    gfx.DrawString("Totaal", fontBoldText, XBrushes.Black, 500, productY + 20);
+                    gfx.DrawString(room.floorType.name, fontText, XBrushes.Black, 60, productY + 40);
+                    gfx.DrawString(squareM.ToString(), fontText, XBrushes.Black, 350, productY + 40);
+                    gfx.DrawString("€" + room.floorType.price.ToString(), fontText, XBrushes.Black, 425, productY + 40);
+                    gfx.DrawString("€" + prijs.ToString(), fontText, XBrushes.Black, 500, productY + 40);
+                }
+
+                //Draw total price.
+                gfx.DrawLine(pen, new Point(40, productY + 50), new Point(555, productY + 50));
+                gfx.DrawString(String.Format("Totaalprijs: €{0}", totPrijs), fontTitle, XBrushes.Black, 385, productY + 70);
+            }
+        }
+    }
+}

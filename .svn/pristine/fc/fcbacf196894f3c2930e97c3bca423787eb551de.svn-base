@@ -1,0 +1,111 @@
+﻿using KantoorApplicatie.Views;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using KantoorApplicatie.Models.Invoice;
+
+namespace KantoorApplicatie.Models
+{
+    public class Product
+    {
+        public int productId { get; set; }
+        public string name { get; set; }
+        public string description { get; set; }
+        public int width { get; set; }
+        public int height { get; set; }
+        public double price { get; set; }
+        // String to get working path of your project.
+        private string workingPath = Path.Combine(Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory()))), "ProductImages");
+        // The image is used to show on the designPanel and the catalogList
+        // Also need to save this for turning the image
+        private Bitmap image;
+        // Filename is used to save in the database.
+        private string imageName = "";
+        public string ImageName
+        {
+            get 
+            {
+                return imageName;
+            }
+            set
+            {
+                // When image name is set, make a separate image.
+                imageName = value;
+                string temp = Path.Combine(workingPath, imageName);
+                if (File.Exists(temp))
+                {
+                    image = new Bitmap(new Bitmap(temp), new Size(width, height));
+                }
+                
+            }
+        }
+        public Point location;
+        public TrackBar tb = new TrackBar();
+        public RotatePanel rp;
+        public virtual ICollection<OrderedProduct> orderedProducts { get; set; }
+        public bool active { get; set; }
+
+        public Product()
+        {
+            active = true;
+        }
+
+        public Product(string name, string description, int width, int height, double price, string imageName)
+        {
+            orderedProducts = new List<OrderedProduct>();
+            this.name = name;
+            this.description = description;
+            this.width = width;
+            this.height = height;
+            this.price = price;
+            this.ImageName = imageName;
+            active = true;
+        }
+
+        public Product Clone()
+        {
+            Product copy = new Product(name, description, width, height, price, imageName);
+            copy.productId = productId;
+            return copy;
+        }
+
+        public Bitmap GetImage()
+        {
+            Bitmap bm = new Bitmap(image, new Size(width, height));
+            return bm;
+        }
+
+        public void RotateImage(RotateFlipType type)
+        {
+            int temp = width;
+            width = height;
+            height = temp;
+            image.RotateFlip(type);
+        }
+
+        public void SetLocation(int w, int h)
+        {
+            location.X = w;
+            location.Y = h;
+        }
+        // Scaled sizes used for drawing inside the design panel
+        public int GetScaledWidth(float scale)
+        {
+            return (int)(width / scale);
+        }
+        public int GetScaledHeight(float scale)
+        {
+            return (int)(height / scale);
+        }
+
+        public override string ToString() 
+        {
+            return "ID: " + productId + " - Name: " + name;
+        }
+    }
+}

@@ -1,0 +1,140 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using KantoorApplicatie.Models;
+using System.Drawing.Imaging;
+using System.Drawing.Drawing2D;
+
+namespace KantoorApplicatie.Views
+{
+    public partial class RotatePanel : UserControl
+    {
+        private Product product;
+        private DesignPanel dp;
+        Bitmap originalImage;
+
+        int count = 0;
+
+        public RotatePanel(Product p, DesignPanel dp)
+        {
+            this.product = p;
+            this.dp = dp;
+            this.originalImage = p.image;
+            InitializeComponent();
+        }
+
+        private void UpdatePanel()
+        {
+            dp.Invalidate();
+        }
+
+        // Rotate image to the left.
+        private void Left_Click(object sender, EventArgs e)
+        {
+            count -= 10;
+            product.image = RotateImage(originalImage, count);
+            UpdatePanel();
+        }
+
+        // Rotate image to the right.
+        private void Right_Click(object sender, EventArgs e)
+        {
+            count += 10;
+            product.image = RotateImage(originalImage, count);
+            UpdatePanel();
+        }
+
+        // Delete product from the list of products.
+        private void Delete_Click(object sender, EventArgs e)
+        {
+            dp.DeleteProduct(product);
+            dp.Controls.Remove(product.rp);
+            UpdatePanel();
+        }
+        
+        private Bitmap RotateImage(Bitmap img, float rotationAngle) 
+        {
+            double c = (int)Math.Sqrt(Math.Pow(img.Width, 2) + Math.Pow(img.Height, 2));
+
+            double smallest = img.Width;
+            if (img.Height < smallest) {
+                smallest = img.Height;
+            }
+
+            double bmWidth = img.Width;
+            double bmHeight = img.Height;
+
+            Console.WriteLine("1. Width: " + (int)bmWidth);
+            Console.WriteLine("1. Height " + (int)bmHeight);
+
+            // Makes smallest side of product as large as the 
+            if (smallest < c) {
+                double i = c / smallest;
+                bmWidth = img.Width * i;
+                bmHeight = img.Height * i;
+                Console.WriteLine("VALUE i: " + i);
+            }
+
+            Console.WriteLine("2. Width: " + (int)bmWidth);
+            Console.WriteLine("2. Height " + (int)bmHeight);
+            
+            double factorX = product.width / bmWidth;
+            Console.WriteLine("VALUE X: " + factorX);
+            //bmWidth = bmWidth * factorX;
+            //bmHeight = bmHeight * factorX;
+
+            Console.WriteLine("3. Width: " + (int)bmWidth);
+            Console.WriteLine("3. Height " + (int)bmHeight);
+
+            // Creates an empty Bitmap image
+            Bitmap newImage = new Bitmap((int)bmWidth, (int)bmHeight);
+
+            // Sets resolution for correct sharpness and size.
+            newImage.SetResolution(originalImage.HorizontalResolution, originalImage.VerticalResolution);
+
+            // turns the Bitmap into a Graphics object.
+            Graphics gfx = Graphics.FromImage(newImage);
+
+            // Sets correct rotation point.
+            gfx.TranslateTransform((float)newImage.Width / 2, (float)newImage.Height / 2);
+
+            // Rotates image.
+            gfx.RotateTransform(rotationAngle);
+
+            // Sets correct rotation point.
+            gfx.TranslateTransform(-(float)newImage.Width / 2, -(float)newImage.Height / 2);
+
+            //set the InterpolationMode to HighQualityBicubic so to ensure a high
+            //quality image once it is transformed to the specified size
+            gfx.InterpolationMode = InterpolationMode.HighQualityBicubic;
+
+            Console.WriteLine("img.width: " + img.Width);
+            Console.WriteLine("img.height: " + img.Height);
+
+            //now draw our new image onto the graphics object
+            int offsetX = (newImage.Width - img.Width) / 2;
+            int offsetY = (newImage.Height - img.Height) / 2;
+            
+            gfx.DrawImage(img, new Point(offsetX, offsetY));
+
+            //dispose of our Graphics object
+            gfx.Dispose();
+
+            //return the image
+            return newImage;
+        }
+
+        public void StartRotation() 
+        {
+            count = 0;
+            product.image = RotateImage(originalImage, count);
+            UpdatePanel();
+        }
+    }
+}

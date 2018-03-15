@@ -1,0 +1,52 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using KantoorApplicatie.Models;
+using KantoorApplicatie.Views;
+
+namespace KantoorApplicatie.Controllers
+{
+    public class DragController
+    {
+        private Product p;
+        private DesignPanel dp;
+
+        public DragController(Product p, DesignPanel dp)
+        {
+            this.dp = dp;
+            this.p = p;
+        }
+
+        // Copy product image and use image as cursor.
+        public void StartDrag(object sender, MouseEventArgs e)
+        {
+            Bitmap bm = new Bitmap(p.GetImage(), new Size(p.GetScaledWidth(dp.scale), p.GetScaledHeight(dp.scale)));
+            var dragImage = bm;
+            IntPtr icon = dragImage.GetHicon();
+            Cursor.Current = new Cursor(icon);
+        }
+
+        // When left mousebutton is released:
+        // Clone product and give it the current location. Then add it to the productlist.
+        public void PlaceProduct()
+        {
+            Point relativePoint = Cursor.Position;
+            if (dp != null)
+            {
+                if(dp.rDesign != null && relativePoint.X - (p.GetScaledWidth(dp.scale) / 2) > dp.roomX && relativePoint.X + (p.GetScaledWidth(dp.scale) / 2) < (dp.roomX + dp.rDesign.newWidth) && relativePoint.Y - (p.GetScaledHeight(dp.scale) / 2) - p.GetScaledHeight(dp.scale) > dp.roomY && relativePoint.Y + (p.GetScaledHeight(dp.scale) / 2) - p.GetScaledHeight(dp.scale) < (dp.roomY + dp.rDesign.newHeight))
+                {
+                    Product added = p.Clone();
+                    added.productId = p.productId;
+                    added.SetLocation(relativePoint.X - (p.GetScaledWidth(dp.scale) / 2), relativePoint.Y - (p.GetScaledHeight(dp.scale) / 2) - (p.GetScaledHeight(dp.scale) / 2));
+                    added.rp = new RotatePanel(added, dp);
+                    dp.AddProduct(added);
+                    dp.Invalidate();
+                }
+            }
+        }
+    }
+}

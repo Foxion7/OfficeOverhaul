@@ -1,0 +1,86 @@
+﻿namespace KantoorApplicatie.Views
+{
+    partial class RoomMaker
+    {
+        /// <summary> 
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary> 
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Component Designer generated code
+
+        /// <summary> 
+        /// Required method for Designer support - do not modify 
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.restartButton = new System.Windows.Forms.Button();
+            this.saveButton = new System.Windows.Forms.Button();
+            this.undoLast = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // restartButton
+            // 
+            this.restartButton.Location = new System.Drawing.Point(3, 45);
+            this.restartButton.Name = "restartButton";
+            this.restartButton.Size = new System.Drawing.Size(75, 23);
+            this.restartButton.TabIndex = 0;
+            this.restartButton.Text = "Opnieuw beginnen";
+            this.restartButton.UseVisualStyleBackColor = true;
+            this.restartButton.Click += new System.EventHandler(this.restartButton_Click);
+            // 
+            // saveButton
+            // 
+            this.saveButton.Location = new System.Drawing.Point(3, 16);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(75, 23);
+            this.saveButton.TabIndex = 1;
+            this.saveButton.Text = "Opslaan";
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
+            // 
+            // undoLast
+            // 
+            this.undoLast.Location = new System.Drawing.Point(4, 75);
+            this.undoLast.Name = "undoLast";
+            this.undoLast.Size = new System.Drawing.Size(75, 23);
+            this.undoLast.TabIndex = 2;
+            this.undoLast.Text = "Laatste ongedaan maken";
+            this.undoLast.UseVisualStyleBackColor = true;
+            this.undoLast.Click += new System.EventHandler(this.undoLast_Click);
+            // 
+            // RoomMaker
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.undoLast);
+            this.Controls.Add(this.saveButton);
+            this.Controls.Add(this.restartButton);
+            this.Name = "RoomMaker";
+            this.Size = new System.Drawing.Size(887, 454);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.RoomMaker_MouseDown);
+            this.ResumeLayout(false);
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Button restartButton;
+        private System.Windows.Forms.Button saveButton;
+        private System.Windows.Forms.Button undoLast;
+    }
+}

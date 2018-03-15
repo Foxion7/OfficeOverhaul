@@ -1,0 +1,305 @@
+﻿namespace KantoorApplicatie.Views
+{
+    partial class ShapeSelector
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.ButtonOk = new System.Windows.Forms.Button();
+            this.ButtonCancel = new System.Windows.Forms.Button();
+            this.radioSquare = new System.Windows.Forms.RadioButton();
+            this.txtHeight = new System.Windows.Forms.TextBox();
+            this.txtWidth = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.squareBox = new System.Windows.Forms.PictureBox();
+            this.errorMsg = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.floorPictureBox = new System.Windows.Forms.PictureBox();
+            this.floorMaterialComboBox = new System.Windows.Forms.ComboBox();
+            this.floorTypeComboBox = new System.Windows.Forms.ComboBox();
+            this.floorMaterialLabel = new System.Windows.Forms.Label();
+            this.floorTypeLabel = new System.Windows.Forms.Label();
+            this.floorPanel = new System.Windows.Forms.Panel();
+            this.priceLabel = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.squareBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.floorPictureBox)).BeginInit();
+            this.floorPanel.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // ButtonOk
+            // 
+            this.ButtonOk.Location = new System.Drawing.Point(59, 433);
+            this.ButtonOk.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ButtonOk.Name = "ButtonOk";
+            this.ButtonOk.Size = new System.Drawing.Size(100, 23);
+            this.ButtonOk.TabIndex = 0;
+            this.ButtonOk.Text = "Ok";
+            this.ButtonOk.UseVisualStyleBackColor = true;
+            this.ButtonOk.Click += new System.EventHandler(this.ButtonOk_Click);
+            // 
+            // ButtonCancel
+            // 
+            this.ButtonCancel.Location = new System.Drawing.Point(403, 433);
+            this.ButtonCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ButtonCancel.Name = "ButtonCancel";
+            this.ButtonCancel.Size = new System.Drawing.Size(85, 23);
+            this.ButtonCancel.TabIndex = 1;
+            this.ButtonCancel.Text = "Annuleren";
+            this.ButtonCancel.UseVisualStyleBackColor = true;
+            this.ButtonCancel.Click += new System.EventHandler(this.ButtonCancel_Click);
+            // 
+            // radioSquare
+            // 
+            this.radioSquare.AutoSize = true;
+            this.radioSquare.Checked = true;
+            this.radioSquare.Location = new System.Drawing.Point(165, 55);
+            this.radioSquare.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.radioSquare.Name = "radioSquare";
+            this.radioSquare.Size = new System.Drawing.Size(17, 16);
+            this.radioSquare.TabIndex = 5;
+            this.radioSquare.TabStop = true;
+            this.radioSquare.UseVisualStyleBackColor = true;
+            // 
+            // txtHeight
+            // 
+            this.txtHeight.Location = new System.Drawing.Point(403, 101);
+            this.txtHeight.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtHeight.MaxLength = 10;
+            this.txtHeight.Name = "txtHeight";
+            this.txtHeight.Size = new System.Drawing.Size(52, 22);
+            this.txtHeight.TabIndex = 8;
+            this.txtHeight.Text = "500";
+            this.txtHeight.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtHeight_KeyDown);
+            // 
+            // txtWidth
+            // 
+            this.txtWidth.Location = new System.Drawing.Point(403, 161);
+            this.txtWidth.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtWidth.MaxLength = 10;
+            this.txtWidth.Name = "txtWidth";
+            this.txtWidth.Size = new System.Drawing.Size(52, 22);
+            this.txtWidth.TabIndex = 9;
+            this.txtWidth.Text = "500";
+            this.txtWidth.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtWidth_KeyDown);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.label1.Location = new System.Drawing.Point(337, 105);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(52, 18);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Lengte";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(331, 165);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(59, 18);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "Breedte";
+            // 
+            // squareBox
+            // 
+            this.squareBox.BackColor = System.Drawing.Color.Transparent;
+            this.squareBox.Location = new System.Drawing.Point(59, 28);
+            this.squareBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.squareBox.Name = "squareBox";
+            this.squareBox.Size = new System.Drawing.Size(69, 70);
+            this.squareBox.TabIndex = 2;
+            this.squareBox.TabStop = false;
+            this.squareBox.Click += new System.EventHandler(this.squareBox_Click);
+            // 
+            // errorMsg
+            // 
+            this.errorMsg.AutoSize = true;
+            this.errorMsg.ForeColor = System.Drawing.Color.Red;
+            this.errorMsg.Location = new System.Drawing.Point(317, 55);
+            this.errorMsg.Name = "errorMsg";
+            this.errorMsg.Size = new System.Drawing.Size(0, 17);
+            this.errorMsg.TabIndex = 12;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(460, 105);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(29, 18);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "cm";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(460, 165);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(29, 18);
+            this.label4.TabIndex = 14;
+            this.label4.Text = "cm";
+            // 
+            // floorPictureBox
+            // 
+            this.floorPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.floorPictureBox.Location = new System.Drawing.Point(307, 0);
+            this.floorPictureBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.floorPictureBox.Name = "floorPictureBox";
+            this.floorPictureBox.Size = new System.Drawing.Size(171, 156);
+            this.floorPictureBox.TabIndex = 1;
+            this.floorPictureBox.TabStop = false;
+            // 
+            // floorMaterialComboBox
+            // 
+            this.floorMaterialComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.floorMaterialComboBox.FormattingEnabled = true;
+            this.floorMaterialComboBox.Location = new System.Drawing.Point(5, 37);
+            this.floorMaterialComboBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.floorMaterialComboBox.Name = "floorMaterialComboBox";
+            this.floorMaterialComboBox.Size = new System.Drawing.Size(160, 24);
+            this.floorMaterialComboBox.TabIndex = 2;
+            this.floorMaterialComboBox.SelectedIndexChanged += new System.EventHandler(this.floorMaterialComboBox_SelectedIndexChanged);
+            // 
+            // floorTypeComboBox
+            // 
+            this.floorTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.floorTypeComboBox.FormattingEnabled = true;
+            this.floorTypeComboBox.Location = new System.Drawing.Point(5, 100);
+            this.floorTypeComboBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.floorTypeComboBox.Name = "floorTypeComboBox";
+            this.floorTypeComboBox.Size = new System.Drawing.Size(160, 24);
+            this.floorTypeComboBox.TabIndex = 3;
+            this.floorTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.floorTypeComboBox_SelectedIndexChanged);
+            // 
+            // floorMaterialLabel
+            // 
+            this.floorMaterialLabel.AutoSize = true;
+            this.floorMaterialLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.floorMaterialLabel.Location = new System.Drawing.Point(4, 17);
+            this.floorMaterialLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.floorMaterialLabel.Name = "floorMaterialLabel";
+            this.floorMaterialLabel.Size = new System.Drawing.Size(106, 18);
+            this.floorMaterialLabel.TabIndex = 4;
+            this.floorMaterialLabel.Text = "Vloer materiaal";
+            // 
+            // floorTypeLabel
+            // 
+            this.floorTypeLabel.AutoSize = true;
+            this.floorTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.floorTypeLabel.Location = new System.Drawing.Point(4, 78);
+            this.floorTypeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.floorTypeLabel.Name = "floorTypeLabel";
+            this.floorTypeLabel.Size = new System.Drawing.Size(45, 18);
+            this.floorTypeLabel.TabIndex = 5;
+            this.floorTypeLabel.Text = "Soort";
+            // 
+            // floorPanel
+            // 
+            this.floorPanel.BackColor = System.Drawing.Color.Transparent;
+            this.floorPanel.Controls.Add(this.priceLabel);
+            this.floorPanel.Controls.Add(this.floorTypeLabel);
+            this.floorPanel.Controls.Add(this.floorMaterialLabel);
+            this.floorPanel.Controls.Add(this.floorTypeComboBox);
+            this.floorPanel.Controls.Add(this.floorMaterialComboBox);
+            this.floorPanel.Controls.Add(this.floorPictureBox);
+            this.floorPanel.Location = new System.Drawing.Point(59, 271);
+            this.floorPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.floorPanel.Name = "floorPanel";
+            this.floorPanel.Size = new System.Drawing.Size(491, 156);
+            this.floorPanel.TabIndex = 15;
+            // 
+            // priceLabel
+            // 
+            this.priceLabel.AutoSize = true;
+            this.priceLabel.Location = new System.Drawing.Point(172, 103);
+            this.priceLabel.Name = "priceLabel";
+            this.priceLabel.Size = new System.Drawing.Size(0, 17);
+            this.priceLabel.TabIndex = 6;
+            // 
+            // ShapeSelector
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(603, 475);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.errorMsg);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.txtWidth);
+            this.Controls.Add(this.txtHeight);
+            this.Controls.Add(this.radioSquare);
+            this.Controls.Add(this.squareBox);
+            this.Controls.Add(this.ButtonCancel);
+            this.Controls.Add(this.ButtonOk);
+            this.Controls.Add(this.floorPanel);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "ShapeSelector";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Ruimte aanmaken";
+            ((System.ComponentModel.ISupportInitialize)(this.squareBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.floorPictureBox)).EndInit();
+            this.floorPanel.ResumeLayout(false);
+            this.floorPanel.PerformLayout();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Button ButtonOk;
+        private System.Windows.Forms.Button ButtonCancel;
+        private System.Windows.Forms.PictureBox squareBox;
+        private System.Windows.Forms.RadioButton radioSquare;
+        private System.Windows.Forms.TextBox txtHeight;
+        private System.Windows.Forms.TextBox txtWidth;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label errorMsg;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.PictureBox floorPictureBox;
+        private System.Windows.Forms.ComboBox floorMaterialComboBox;
+        private System.Windows.Forms.ComboBox floorTypeComboBox;
+        private System.Windows.Forms.Label floorMaterialLabel;
+        private System.Windows.Forms.Label floorTypeLabel;
+        private System.Windows.Forms.Panel floorPanel;
+        private System.Windows.Forms.Label priceLabel;
+    }
+}

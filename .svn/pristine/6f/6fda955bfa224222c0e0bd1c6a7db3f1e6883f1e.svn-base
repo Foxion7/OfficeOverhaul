@@ -1,0 +1,265 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using KantoorApplicatie.Models;
+using KantoorApplicatie.Controllers;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+
+namespace KantoorApplicatie.Views
+{
+    public partial class DesignPanel : UserControl
+    {
+        private DesignPanelController rc;
+
+        public bool containsInactiveProduct;
+        private Room room;
+        public float roomX;
+        public float roomY;
+        public float scale;
+        private Bitmap test;
+        private Rectangle nightMode;
+        private bool nightModeBool;
+        private GraphicsPath gPath;
+
+        public Room rDesign 
+            {
+            get { return room; }
+            set
+            {
+                room = value;
+                test = null;
+                Invalidate();
+            }
+        }
+        public DesignPanel() 
+        {
+            InitializeComponent();
+            nightModeBool = false;
+            rc = new DesignPanelController(this);
+        }
+
+        protected override void OnPaint(PaintEventArgs e) 
+        {
+            Graphics g = e.Graphics;
+
+            // Draw rooms.
+            if (room != null)
+            {
+                scale = rc.CalculateScale();
+                // Values to get the center of the screen
+                roomX = (Width / 2) - (room.newWidth / 2);
+                roomY = (Height / 2) - (room.newHeight / 2);
+                Pen p = new Pen(Color.Black, 2);
+                // Draw the floor.
+                if (test == null)
+                {
+                    test = new Bitmap(Width,Height);
+                    using (Graphics k = Graphics.FromImage(test))
+                    {
+                        if(gPath != null)
+                        {
+                            gPath = rc.MakeGraphicsPath();
+                            g.SetClip(gPath, CombineMode.Replace);
+                        }
+                        Random rand = new Random();
+                        Bitmap tempImage = new Bitmap(room.floorType.GetImage(), rand.Next(room.floorType.GetImage().Width / 3, room.floorType.GetImage().Width), room.floorType.GetImage().Height);
+                        
+                        // Lists with flips to change up the floor pattern.
+                        Rectangle rect = new Rectangle((int)roomX, (int)roomY, (int)room.newWidth, (int)room.newHeight);
+
+                        List<RotateFlipType> flips = new List<RotateFlipType> { RotateFlipType.Rotate180FlipNone, RotateFlipType.RotateNoneFlipX, RotateFlipType.RotateNoneFlipY, RotateFlipType.Rotate180FlipXY};
+                        for (int y = rect.Y; y < rect.Bottom; y += tempImage.Height)
+                        {
+                            for (int x = rect.X; x < rect.Right; x += tempImage.Width)
+                            {
+                                tempImage = new Bitmap(room.floorType.GetImage(), rand.Next(room.floorType.GetImage().Width / 3, room.floorType.GetImage().Width), room.floorType.GetImage().Height);
+                                tempImage.RotateFlip(flips[rand.Next(0, 3)]);
+                                Rectangle drawRect = new Rectangle(x, y, Math.Min(tempImage.Width, rect.Right - x),
+                                               Math.Min(tempImage.Height, rect.Bottom - y));
+                                Rectangle imageRect = new Rectangle(0, 0, drawRect.Width, drawRect.Height);
+                                k.DrawImage(tempImage, drawRect, imageRect, GraphicsUnit.Pixel);
+                            }
+                        }
+                        p.Color = Color.Transparent;
+                        if(gPath != null)
+                        {
+                            k.FillPath(p.Brush, gPath);
+                        }
+                    }   
+
+                }
+                // Load made image.
+                g.DrawImage(test, 0, 0);
+                // If the shape is a circle, add a space around it.
+                if (room.shape == "Circle")
+                {
+                    var rgn = new Region(new Rectangle((int)roomX, (int)roomY, (int)room.newWidth, (int)room.newHeight));
+                    var path = new GraphicsPath();
+                    path.AddEllipse(roomX, roomY, room.newWidth, room.newHeight);
+                    rgn.Exclude(path);
+                    e.Graphics.FillRegion(Brushes.White, rgn);
+                }
+                
+                g.DrawString(String.Format("{0} m", (float)room.width / 100), new Font("Arial", 10), p.Brush, roomX + (room.newWidth / 2), roomY + room.newHeight + 10);
+                g.DrawString(String.Format("{0} m", (float)room.height / 100), new Font("Arial", 10), p.Brush, roomX - 30, roomY + (room.newHeight / 2));
+
+
+                // Draws products.
+                for (int i = 0; i < room.productList.Count; i++)
+                {
+                    if (room.productList[i].active) {
+
+                        Product product = room.productList[i];
+                        Bitmap tempImage = new Bitmap(product.image, new Size((int)(product.image.Width/scale), (int)(product.image.Height/scale)));
+                        Point point = new Point(product.location.X, product.location.Y);
+
+                        g.FillRectangle(Brushes.Green, new Rectangle(product.location.X, product.location.Y, (int)(product.image.Width/scale), (int)(product.image.Height/scale)));
+                        g.DrawImage(tempImage, point);
+                    }
+                }
+
+                if (nightModeBool)
+                {
+                    // Draw nightMode.
+                    Brush b = new SolidBrush(Color.FromArgb(100, 0, 0, 0));
+                    g.FillRectangle(b, nightMode);
+
+                    // Draw lightCircles.
+                    for (int i = 0; i < room.productList.Count; i++)
+                    {
+                        if(room.productList[i].GetType().Name == "Lamp")
+                        {
+                            Lamp tempLamp = (Lamp)room.productList[i];
+                            g.FillEllipse(new SolidBrush(Color.FromArgb(80, 200, 239, 67)), new Rectangle(
+                            tempLamp.location.X - tempLamp.lightRadius,
+                            tempLamp.location.Y - tempLamp.lightRadius,
+                            tempLamp.GetScaledWidth(scale) + (tempLamp.lightRadius * 2),
+                            tempLamp.GetScaledHeight(scale) + (tempLamp.lightRadius * 2)));
+                        }
+                    }
+                }
+            }
+        }
+
+        public void AddProduct(Product p) 
+        {
+            room.productList.Add(p);
+        }
+
+        public void DeleteProduct(Product p) 
+        {
+            room.productList.Remove(p);
+        }
+
+        public void MoveProduct(Product p) 
+        {
+            movingProduct = p;
+            MouseMove += Drag;
+        }
+
+        public void SetNightMode()
+        {
+            nightMode = new Rectangle(new Point((int)roomX, (int)roomY), new Size((int)room.newWidth, (int)room.newHeight));
+            nightModeBool = true;
+            Invalidate();
+        }
+
+        public void UnsetMightMode()
+        {
+            nightModeBool = false;
+            Invalidate();
+        }
+
+        // Delete product from floor when deleted from the list.
+        public void ClearNonActiveProducts() 
+        {
+            room.productList.RemoveAll(v => !v.active);
+            Invalidate();
+        }
+
+        private Product movingProduct;
+        public void Drag(object sender, MouseEventArgs m)
+        {
+            if (m.Button == MouseButtons.Left)
+            {
+                Cursor.Current = Cursors.Hand;
+                // If product is inside hitbox, draw again.
+                if (room != null)
+                {
+                    // 24 is the height in px of the taskbar at the top of the program.
+                    movingProduct.SetLocation(MousePosition.X - (int)(movingProduct.rp.bmWidth/scale/2), MousePosition.Y - (int)(movingProduct.rp.bmHeight / scale / 2) - 24);
+                    Controls.Remove(movingProduct.rp);
+                    Invalidate();
+                }
+            }
+            if(m.Button == MouseButtons.None)
+            {
+                Cursor.Current = Cursors.Arrow;
+                MouseMove -= Drag;
+            }
+        }
+
+        // Redraw screen when size changes.
+        private void DesignPanel_ClientSizeChanged(object sender, EventArgs e)
+        {
+            Invalidate();
+        }
+
+        private void DesignPanel_MouseDown(object sender, MouseEventArgs e)
+        {
+            Point relativePoint = PointToClient(Cursor.Position);
+            for (int i = 0; i < room.productList.Count; i++)
+            {
+                Product product = room.productList[i];
+                if (relativePoint.X >= product.location.X + product.rp.offsetX / scale &&
+                    relativePoint.X <= product.location.X + ((product.rp.bmWidth - product.rp.offsetX) / scale) && 
+                    relativePoint.Y >= product.location.Y + product.rp.offsetY / scale &&
+                    relativePoint.Y <= product.location.Y + ((product.rp.bmHeight - product.rp.offsetY) / scale))
+                {
+                    MoveProduct(product);
+                }
+            }
+        }
+
+        private void DesignPanel_MouseClick(object sender, MouseEventArgs e)
+        {
+            Point relativePoint = new Point(Cursor.Position.X, Cursor.Position.Y-24);
+            for (int i = 0; i < room.productList.Count; i++)
+            {
+                Product product = room.productList[i];
+                if (relativePoint.X >= product.location.X + product.rp.offsetX / scale &&
+                    relativePoint.X <= product.location.X + ((product.rp.bmWidth - product.rp.offsetX) / scale) &&
+                    relativePoint.Y >= product.location.Y + product.rp.offsetY / scale &&
+                    relativePoint.Y <= product.location.Y + ((product.rp.bmHeight - product.rp.offsetY) / scale))
+                {
+                    product.rp.Location = new Point(product.location.X + (int)(product.rp.bmWidth/scale/2) - product.rp.Width/2, product.location.Y);
+                    Controls.Add(product.rp);
+                    Invalidate();
+                }
+                else
+                {
+                    Controls.Remove(product.rp);
+                }
+            }
+        }
+        // When the mouse leaves the design panel, clear the RotatePanel controls.
+        private void DesignPanel_MouseLeave(object sender, EventArgs e)
+        {
+            if(this.GetChildAtPoint(this.PointToClient(MousePosition)) == null)
+            {
+                Controls.Clear();
+            }
+        }
+
+        private void DesignPanel_MouseMove(object sender, MouseEventArgs e)
+        {
+        }
+    }
+}

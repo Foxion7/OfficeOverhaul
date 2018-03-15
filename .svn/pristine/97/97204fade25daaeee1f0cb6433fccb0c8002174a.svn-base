@@ -1,0 +1,25 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace KantoorApplicatie.Models
+{
+    public class Essentials : Product {
+        public Essentials() {
+        }
+
+        public Essentials(string name, string description, int width, int height, double price, string ImageName) : base(name, description, width, height, price, ImageName) {
+        }
+
+        public override Product Clone()
+        {
+            Product copy = new Essentials(name, description, width, height, price, ImageName);
+            copy.productId = productId;
+            copy.active = active;
+            return copy;
+        }
+    }
+}

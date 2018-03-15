@@ -1,0 +1,48 @@
+C:\Users\Lars\Desktop\HuidigeProject\UnitTestKantoorApplicatie\obj\Debug\UnitTestKantoorApplicatie.csprojResolveAssemblyReference.cache
+C:\Users\Lars\Desktop\HuidigeProject\UnitTestKantoorApplicatie\obj\Debug\UnitTestKantoorApplicatie.csproj.CoreCompileInputs.cache
+C:\Users\Lars\Desktop\HuidigeProject\UnitTestKantoorApplicatie\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\Lars\Desktop\HuidigeProject\UnitTestKantoorApplicatie\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\Lars\Desktop\HuidigeProject\UnitTestKantoorApplicatie\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\Lars\Desktop\HuidigeProject\UnitTestKantoorApplicatie\bin\Debug\UnitTestKantoorApplicatie.dll.config
+C:\Users\Lars\Desktop\HuidigeProject\UnitTestKantoorApplicatie\bin\Debug\UnitTestKantoorApplicatie.dll
+C:\Users\Lars\Desktop\HuidigeProject\UnitTestKantoorApplicatie\bin\Debug\UnitTestKantoorApplicatie.pdb
+C:\Users\Lars\Desktop\HuidigeProject\UnitTestKantoorApplicatie\bin\Debug\EntityFramework.dll
+C:\Users\Lars\Desktop\HuidigeProject\UnitTestKantoorApplicatie\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Lars\Desktop\HuidigeProject\UnitTestKantoorApplicatie\bin\Debug\KantoorApplicatie.exe
+C:\Users\Lars\Desktop\HuidigeProject\UnitTestKantoorApplicatie\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+C:\Users\Lars\Desktop\HuidigeProject\UnitTestKantoorApplicatie\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+C:\Users\Lars\Desktop\HuidigeProject\UnitTestKantoorApplicatie\bin\Debug\PdfSharp.dll
+C:\Users\Lars\Desktop\HuidigeProject\UnitTestKantoorApplicatie\bin\Debug\KantoorApplicatie.pdb
+C:\Users\Lars\Desktop\HuidigeProject\UnitTestKantoorApplicatie\bin\Debug\KantoorApplicatie.exe.config
+C:\Users\Lars\Desktop\HuidigeProject\UnitTestKantoorApplicatie\bin\Debug\EntityFramework.xml
+C:\Users\Lars\Desktop\HuidigeProject\UnitTestKantoorApplicatie\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Lars\Desktop\HuidigeProject\UnitTestKantoorApplicatie\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+C:\Users\Lars\Desktop\HuidigeProject\UnitTestKantoorApplicatie\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+C:\Users\Lars\Desktop\HuidigeProject\UnitTestKantoorApplicatie\bin\Debug\PdfSharp.xml
+C:\Users\Lars\Desktop\HuidigeProject\UnitTestKantoorApplicatie\bin\Debug\de\PdfSharp.resources.dll
+C:\Users\Lars\Desktop\HuidigeProject\UnitTestKantoorApplicatie\obj\Debug\UnitTestKantoorApplicatie.dll
+C:\Users\Lars\Desktop\HuidigeProject\UnitTestKantoorApplicatie\obj\Debug\UnitTestKantoorApplicatie.pdb
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\UnitTestKantoorApplicatie\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\UnitTestKantoorApplicatie\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\UnitTestKantoorApplicatie\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\UnitTestKantoorApplicatie\bin\Debug\UnitTestKantoorApplicatie.dll.config
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\UnitTestKantoorApplicatie\bin\Debug\UnitTestKantoorApplicatie.dll
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\UnitTestKantoorApplicatie\bin\Debug\UnitTestKantoorApplicatie.pdb
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\UnitTestKantoorApplicatie\bin\Debug\EntityFramework.dll
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\UnitTestKantoorApplicatie\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\UnitTestKantoorApplicatie\bin\Debug\KantoorApplicatie.exe
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\UnitTestKantoorApplicatie\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\UnitTestKantoorApplicatie\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\UnitTestKantoorApplicatie\bin\Debug\PdfSharp.dll
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\UnitTestKantoorApplicatie\bin\Debug\KantoorApplicatie.pdb
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\UnitTestKantoorApplicatie\bin\Debug\KantoorApplicatie.exe.config
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\UnitTestKantoorApplicatie\bin\Debug\EntityFramework.xml
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\UnitTestKantoorApplicatie\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\UnitTestKantoorApplicatie\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\UnitTestKantoorApplicatie\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\UnitTestKantoorApplicatie\bin\Debug\PdfSharp.xml
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\UnitTestKantoorApplicatie\bin\Debug\de\PdfSharp.resources.dll
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\UnitTestKantoorApplicatie\obj\Debug\UnitTestKantoorApplicatie.csprojResolveAssemblyReference.cache
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\UnitTestKantoorApplicatie\obj\Debug\UnitTestKantoorApplicatie.csproj.CoreCompileInputs.cache
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\UnitTestKantoorApplicatie\obj\Debug\UnitTestKantoorApplicatie.dll
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\UnitTestKantoorApplicatie\obj\Debug\UnitTestKantoorApplicatie.pdb

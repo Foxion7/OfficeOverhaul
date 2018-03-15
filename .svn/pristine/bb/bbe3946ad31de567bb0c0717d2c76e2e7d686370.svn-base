@@ -1,0 +1,59 @@
+﻿using KantoorApplicatie.Models.Invoice;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using KantoorApplicatie.Controllers;
+using KantoorApplicatie.Db;
+
+// namespace klopt niet
+namespace KantoorApplicatie.Views.Invoice {
+    public partial class RepresentativeForm : Form {
+
+        public Representative representative { get; set; }
+
+        public RepresentativeForm() {
+            InitializeComponent();
+            //this.BackgroundImageLayout = ImageLayout.Stretch;
+            //this.BackgroundImage = Converter.ByteArrayToImage(DatabaseController.getLastSubTheme().image);
+            representative = new Representative();
+        }
+
+        private void okButton_Click(object sender, EventArgs e) {
+
+            if (string.IsNullOrWhiteSpace(companyNameTextbox.Text) ||
+                string.IsNullOrWhiteSpace(postalcodeTextbox.Text) ||
+                string.IsNullOrWhiteSpace(locationTextbox.Text) ||
+                string.IsNullOrWhiteSpace(phonenumberTextbox.Text) ||
+                string.IsNullOrWhiteSpace(emailTextbox.Text)||
+                string.IsNullOrWhiteSpace(kvkNumberTextbox.Text) ||
+                string.IsNullOrWhiteSpace(ibanTextbox.Text)) {
+                MessageBox.Show("Vul alstublieft alle velden in.", "Foutmelding",
+                MessageBoxButtons.OK);
+            } else {
+                try {
+                    representative = new Representative(
+                    companyNameTextbox.Text,
+                    postalcodeTextbox.Text,
+                    locationTextbox.Text,
+                    phonenumberTextbox.Text,
+                    emailTextbox.Text,
+                    kvkNumberTextbox.Text,
+                    ibanTextbox.Text
+                    );
+                    this.representative = representative;
+                } catch (InvalidOperationException ioe) {
+                    Console.WriteLine(ioe);
+                } catch (FormatException fe) {
+                    Console.WriteLine(fe);
+                }
+                Close();
+            }
+        }
+    }
+}

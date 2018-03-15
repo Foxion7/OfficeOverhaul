@@ -1,0 +1,81 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using KantoorApplicatie.Models;
+using KantoorApplicatie.Views;
+using System.Drawing.Drawing2D;
+
+namespace KantoorApplicatie.Controllers
+{
+    public class DragController
+    {
+        private Product p;
+        private DesignPanel dp;
+
+        public DragController(Product p, DesignPanel dp)
+        {
+            this.dp = dp;
+            this.p = p;
+        }
+
+        // Copy product image and use image as cursor.
+        public void StartDrag(object sender, MouseEventArgs e)
+        {
+            // Gets product image.
+            Bitmap newImage = new Bitmap(p.image, new Size((int)(p.image.Width/dp.scale), (int)(p.image.Height/dp.scale)));
+
+            // Draws mouse over product image.
+            Graphics gfx = Graphics.FromImage(newImage);
+            gfx.DrawImage(Properties.Resources.MouseImage, new Point(p.image.Width/2, p.image.Height/2));
+            gfx.InterpolationMode = InterpolationMode.HighQualityBicubic;
+
+            // Sets image as cursor icon.
+            var dragImage = newImage;
+            IntPtr icon = dragImage.GetHicon();
+            Cursor.Current = new Cursor(icon);
+        }
+
+        // When left mousebutton is released:
+        // Clone product and give it the current location. Then add it to the productlist.
+        public void PlaceProduct()
+        {
+            if (dp != null)
+            {
+                if(dp.gPath.IsVisible(Cursor.Position))
+                {
+                    Product added = p.Clone();
+                    added.productId = p.productId;
+
+                    added.rp = new RotatePanel(added, dp);
+                    added.rp.StartRotation(0);
+
+                    int halfScaledWidth = (int)(added.rp.bmWidth / dp.scale / 2);
+                    int halfScaledHeight = (int)(added.rp.bmHeight / dp.scale / 2);
+
+                    // 24 is the height in px of the tasbar at the top of the program.
+                    added.SetLocation(Cursor.Position.X - halfScaledWidth, Cursor.Position.Y - halfScaledHeight - 24);
+
+                    added.image = new Bitmap(added.image, new Size(added.image.Width, added.image.Height));
+                    dp.AddProduct(added);
+                    dp.Invalidate();
+                }
+            }
+        }
+
+        public void RemoveProduct(Product product) 
+        {
+            foreach (Product p in dp.rDesign.productList) 
+            {
+                if (p.productId == product.productId) 
+                {
+                    p.active = false;
+                }
+            }
+            dp.ClearNonActiveProducts();
+        }
+    }
+}

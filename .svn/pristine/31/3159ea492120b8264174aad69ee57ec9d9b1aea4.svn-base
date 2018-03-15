@@ -1,0 +1,139 @@
+﻿using KantoorApplicatie.Models;
+using KantoorApplicatie.Views;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace KantoorApplicatie.Controllers {
+    public class CatalogController {
+
+        // Vanillalist is the unchanged productlist retrieved from the database. It should never change unless a product is added.
+        private List<Product> vanillaList;
+        private List<Product> productList;
+        public List<CatalogProductPanel> productPanelList { get; set; }
+
+        private CatalogListPanel clp;
+        private DesignPanel dp;
+
+        public string currentSorting { get; set; }
+        public string currentOrdering { get; set; }
+        public string currentSearch { get; set; }
+
+        public CatalogController(CatalogListPanel clp, List<Product> productList, DesignPanel dp) 
+        {
+            this.dp = dp;
+            this.productList = productList;
+            this.clp = clp;
+            vanillaList = productList;
+            productPanelList = new List<CatalogProductPanel>();
+
+            // The standard sorting, ordering and searchqueries are set everytime the program starts.
+            currentOrdering = "Naam: A-Z";
+            currentSorting = "Alle";
+            currentSearch = "";
+        }
+
+        // Refreshes the displayed products in the catalog and applies the current order, sorting or searchquery.
+        public void RefreshDisplayedItems() 
+        {
+            ClearDisplayedProductList();
+            productList = RemoveNonSearchedProducts(vanillaList);
+            productList = RemoveNonSortedProducts(productList);
+            productList = OrderProducts(productList);
+            FillDisplayedProductList();
+        }
+
+        // Removes products from productlist that do not comply with the searchquery.
+        private List<Product> RemoveNonSearchedProducts(List<Product> list) 
+            {
+            if (currentSearch == "") 
+                {
+                return list;
+            }
+            currentSearch = currentSearch.ToLower();
+            List<Product> newList = new List<Product>();
+            for (int i = 0; i < list.Count; i++) {
+                if (list[i].name.ToLower().Contains(currentSearch)) 
+                {
+                    newList.Add(list[i]);
+                }
+            }
+            return newList;
+        }
+        // Removes products from productlist that do not comply with the sorttype.
+        private List<Product> RemoveNonSortedProducts(List<Product> list) 
+            {
+            if (currentSorting == "" || currentSorting == "Alle") 
+            {
+                return list;
+            }
+            List<Product> newList = new List<Product>();
+            for (int i = 0; i < list.Count; i++) 
+                {
+                if (list[i].GetType().ToString().Equals("KantoorApplicatie.Models." + currentSorting)) 
+                {
+                    newList.Add(list[i]);
+                }
+            }
+            return newList;
+        }
+        
+        // Orders the productlist in one of the various orders. 
+        private List<Product> OrderProducts(List<Product> list) 
+        {
+            switch (currentOrdering) 
+            {
+                case "Naam: A-Z":
+                    list = list.OrderBy(x => x.name).ToList();
+                    break;
+                case "Naam: Z-A":
+                    list = list.OrderBy(x => x.name).ToList();
+                    list.Reverse();
+                    break;
+                case "Prijs: Hoog-Laag":
+                    list = list.OrderBy(x => x.price).ToList();
+                    list.Reverse();
+                    break;
+                case "Prijs: Laag-Hoog":
+                    list = list.OrderBy(x => x.price).ToList();
+                    break;
+            }
+            return list;
+        }
+
+        // Makes CatalogProductPanels from all products in productlist.
+        // It positions them correctly and adds these to the actual display: CatalogListPanel.
+        private void FillDisplayedProductList()
+        {
+            Point point = new Point(0, 0);
+            foreach (Product product in productList) 
+            {
+                if (product.active) {
+                    CatalogProductPanel pp = new CatalogProductPanel(product, dp, this);
+                    pp.Location = point;
+                    productPanelList.Add(pp);
+                    clp.AddProduct(pp);
+                    point.Y += 160;
+                }
+            }
+        }
+
+        // Clears all currently displayed products from the catalog.
+        private void ClearDisplayedProductList() 
+        {
+            foreach (CatalogProductPanel pp in productPanelList) 
+            {
+                clp.RemoveProduct(pp);
+            }
+            productPanelList.Clear();
+        }
+
+        public void AddProductToVanillaList(Product p) 
+        {
+            vanillaList.Add(p);
+        }
+    }
+}

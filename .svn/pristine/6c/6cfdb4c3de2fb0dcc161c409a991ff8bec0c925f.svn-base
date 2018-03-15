@@ -1,0 +1,327 @@
+﻿using KantoorApplicatie.Db;
+using KantoorApplicatie.Models;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using KantoorApplicatie.Controllers;
+using System.IO;
+using System.Drawing.Imaging;
+
+namespace KantoorApplicatie.Views
+{
+    public partial class NewProductForm : Form
+    {
+        private Bitmap image, tempImage;
+        private Point pt;
+        private Color targetColor, replacementColor;
+        private static int threshold = 50;
+        //private int targetR, targetG, targetB, replacementR, replacementG, replacementB;
+        private OpenFileDialog fdlg;
+        private CatalogPanel catalogPanel;
+        private string imageName;
+
+        public NewProductForm(CatalogPanel cp)
+        {
+            if (DatabaseController.getLastSubTheme() != null)
+            {
+                this.BackgroundImageLayout = ImageLayout.Stretch;
+                this.BackgroundImage = Converter.ByteArrayToImage(DatabaseController.getLastSubTheme().image);
+            }
+            InitializeComponent();
+
+            // Fillling the combobox.
+            comboBox1.Items.Add("Bank");
+            comboBox1.Items.Add("Essentiële");
+            comboBox1.Items.Add("Stoel");
+            comboBox1.Items.Add("Lamp");
+            comboBox1.Items.Add("Tafel");
+            comboBox1.Items.Add("Kast");
+            comboBox1.Items.Add("Plant");
+            comboBox1.Items.Add("Wandaccesoire");
+            LightBox.Visible = false;
+            LightLabel.Text = "";
+            imageName = "";
+            catalogPanel = cp;
+        }
+
+        private void GenerateButton_Click(object sender, EventArgs e)
+        {
+            // Check if product type is chosen.
+            if (comboBox1.Text == "")
+            {
+                MessageBox.Show("Er moet een soort worden aangegeven.", "Foutmelding", MessageBoxButtons.OK);
+            }
+            // Check if boxes are filled.
+            else if (NameBox.Text == "" || DescriptionBox.Text == "" || WidthBox.Text == "" || HeigthBox.Text == "" || PriceBox.Text == "")
+            {
+                MessageBox.Show("Alle velden moeten ingevuld zijn.", "Foutmelding", MessageBoxButtons.OK);
+            }
+            // Check if lightbox is filled (only when product type is "Lamp").
+            else if (comboBox1.SelectedItem.ToString() == "Lamp" && LightBox.Text == "")
+            {
+                MessageBox.Show("Alle velden moeten ingevuld zijn.", "Foutmelding", MessageBoxButtons.OK);
+            }
+            // Check if a image is uploaded.
+            else if (image == null)
+            {
+                MessageBox.Show("Er moet een afbeelding worden meegegeven.", "Foutmelding", MessageBoxButtons.OK);
+            }
+            else
+            {
+                // Generate path project is based in.
+                string workingPath = Path.Combine(Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory()))), "ProductImages");
+                // Make the directory "ProductImages" if it doesnt exist.
+                if (!Directory.Exists(workingPath))
+                {
+                    Directory.CreateDirectory(workingPath);
+                }
+                // Move image if directory exists.
+                if (Directory.Exists(workingPath))
+                {
+                    // Make unique image name so it doesnt overwrite
+                    imageName = $@"{DateTime.Now.Ticks.GetHashCode().ToString("x").ToUpper()}.png";
+                    // Copy the file to the base of this program.
+                    string tempString = Path.Combine(workingPath, imageName);
+                    pictureBox1.Image.Save(tempString);
+                }
+                Product product = null;
+                //var mc = new MyContext();
+                //using (mc)
+                //{
+                // Checks the selected product type and adds that product to the database.
+                switch (comboBox1.SelectedItem.ToString())
+                {
+                    case "Bank":
+                        DatabaseController.AddProducts(product = new Sofa(NameBox.Text, DescriptionBox.Text, Int32.Parse(WidthBox.Text), Int32.Parse(HeigthBox.Text), double.Parse(PriceBox.Text), imageName));
+                        break;
+                    case "Lamp":
+                        DatabaseController.AddProducts(product = new Lamp(NameBox.Text, DescriptionBox.Text, Int32.Parse(WidthBox.Text), Int32.Parse(HeigthBox.Text), double.Parse(PriceBox.Text), imageName, Int32.Parse(LightBox.Text)));
+                        break;
+                    case "Essentiële":
+                        DatabaseController.AddProducts(product = new Essentials(NameBox.Text, DescriptionBox.Text, Int32.Parse(WidthBox.Text), Int32.Parse(HeigthBox.Text), double.Parse(PriceBox.Text), imageName));
+                        break;
+                    case "Stoel":
+                        DatabaseController.AddProducts(product = new Chair(NameBox.Text, DescriptionBox.Text, Int32.Parse(WidthBox.Text), Int32.Parse(HeigthBox.Text), double.Parse(PriceBox.Text), imageName));
+                        break;
+                    case "Plant":
+                        DatabaseController.AddProducts(product = new Plant(NameBox.Text, DescriptionBox.Text, Int32.Parse(WidthBox.Text), Int32.Parse(HeigthBox.Text), double.Parse(PriceBox.Text), imageName));
+                        break;
+                    case "Tafel":
+                        DatabaseController.AddProducts(product = new Table(NameBox.Text, DescriptionBox.Text, Int32.Parse(WidthBox.Text), Int32.Parse(HeigthBox.Text), double.Parse(PriceBox.Text), imageName));
+                        break;
+                    case "Wandaccesoire":
+                        DatabaseController.AddProducts(product = new WallAccessories(NameBox.Text, DescriptionBox.Text, Int32.Parse(WidthBox.Text), Int32.Parse(HeigthBox.Text), double.Parse(PriceBox.Text), imageName));
+                        break;
+                    case "Kast":
+                        DatabaseController.AddProducts(product = new Closet(NameBox.Text, DescriptionBox.Text, Int32.Parse(WidthBox.Text), Int32.Parse(HeigthBox.Text), double.Parse(PriceBox.Text), imageName));
+                        break;
+                }
+                //}
+                //catalogPanel.catalogController.AddProductToVanillaList(product);
+                catalogPanel.catalogController.RefreshDisplayedItems();
+                MessageBox.Show("Het product is toegevoegd aan de catalogus.", "Succes", MessageBoxButtons.OK);
+                Close();
+            }
+        }
+
+        // Close NewObjectForm.
+        private void CancelButton_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        // Upload and save image as variable.
+        private void UploadImage_Click(object sender, EventArgs e)
+        {
+            fdlg = new OpenFileDialog();
+            fdlg.Title = "Selecteer een afbeelding";
+            fdlg.InitialDirectory = @"c:\";
+            fdlg.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
+            fdlg.RestoreDirectory = true;
+            if (fdlg.ShowDialog() == DialogResult.OK)
+            {
+                image = new Bitmap(fdlg.FileName);
+                pictureBox1.Image = new Bitmap((Image)image.Clone(), 100, 100);
+            }
+        }
+
+        // When product type is "lamp", show "Lichtbox" and "LichtLabel".
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(comboBox1.SelectedItem.ToString() == "Lamp")
+            {
+                LightBox.Visible = true;
+                LightLabel.Text = "Lichtradius";
+            }
+            else
+            {
+                LightBox.Visible = false;
+                LightLabel.Text = "";
+            }
+        }
+
+        // Activates FloodFill with all corners of the picturebox as starting points.
+        private void transparentButton_Click(object sender, EventArgs e)
+        {
+            if (pictureBox1.Image != null)
+            {
+                pictureBox1.Image = new Bitmap((Image)image.Clone(), 100, 100);
+                tempImage = (Bitmap)pictureBox1.Image;
+                replacementColor = Color.Transparent;
+                // Floodfill top left corner.
+                pt = new Point(0, 0);
+                targetColor = tempImage.GetPixel(pt.X, pt.Y);
+                FloodFill(tempImage, pt, targetColor, replacementColor, pictureBox1);
+                // Floodfill top right corner.
+                pt = new Point(tempImage.Width - 1, 0);
+                targetColor = tempImage.GetPixel(pt.X, pt.Y);
+                FloodFill(tempImage, pt, targetColor, replacementColor, pictureBox1);
+                // Floodfill bottom left corner.
+                pt = new Point(0, tempImage.Height - 1);
+                targetColor = tempImage.GetPixel(pt.X, pt.Y);
+                FloodFill(tempImage, pt, targetColor, replacementColor, pictureBox1);
+                // Floodfill bottom right corner.
+                pt = new Point(tempImage.Width - 1, tempImage.Height - 1);
+                targetColor = tempImage.GetPixel(pt.X, pt.Y);
+                FloodFill(tempImage, pt, targetColor, replacementColor, pictureBox1);
+            }
+        }
+
+        private void WidthBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        private void HeigthBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        private void LightBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        private void PriceBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        // Calls the FloodFill with your current cursor location as starting point when you click in the picturebox.
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            if (pictureBox1.Image != null)
+            {
+                tempImage = (Bitmap)pictureBox1.Image;
+                MouseEventArgs me = (MouseEventArgs)e;
+                pt = me.Location;
+                replacementColor = Color.Transparent;
+                FloodFill(tempImage, pt, targetColor, replacementColor, pictureBox1);
+            }
+        }
+
+        // A question mark to inform the user that the can click on the image.
+        private void helpLabel_MouseHover(object sender, EventArgs e)
+        {
+            ToolTip ToolTip = new ToolTip();
+            ToolTip.SetToolTip(helpLabel, "Zijn onderdelen nog niet transparant? Probeer er dan op te klikken!");
+        }
+
+        // Undo the changes made to the image by replacing it with the original image.
+        private void undoButton_Click(object sender, EventArgs e)
+        {
+            if (pictureBox1.Image != null)
+            {
+                pictureBox1.Image = new Bitmap((Image)image.Clone(), 100, 100);
+            }
+        }
+
+        // Trackbar to determine transparency sensitivity.
+        private void transparencyTrackBar_ValueChanged(object sender, EventArgs e)
+        {
+            threshold = transparencyTrackBar.Value;
+            double percentage = (double)(transparencyTrackBar.Value/2.55);
+            transparencyLabel.Text = string.Format("Gevoeligheid: {0:0}%", percentage);
+        }
+
+        // Finds pixels of the targetColor next to the current point and replaces them with the replacementColor.
+        public static void FloodFill(Bitmap bmp, Point pt, Color targetColor, Color replacementColor, PictureBox pcbox)
+        {
+            // Returns if the targetColor is already the same as the replacementColor.
+            targetColor = bmp.GetPixel(pt.X, pt.Y);
+            if (targetColor.ToArgb().Equals(replacementColor.ToArgb()))
+            {
+                return;
+            }
+
+            // Push pixels onto the stack.
+            Stack<Point> pixels = new Stack<Point>();
+            pixels.Push(pt);
+
+            // While the stack of pixels is not empty, cycle through all the to be changed pixels in the image.
+            while (pixels.Count != 0)
+            {
+                Point temp = pixels.Pop();
+
+                // The y1 is used to determine what line of pixels we're in.
+                int y1 = temp.Y;
+
+                while (y1 >= 0 && euclideanDistance(bmp.GetPixel(temp.X, y1), targetColor) <= threshold)
+                {
+                    y1--;
+                }
+                y1++;
+
+                // Booleans to determine if we're moving left or right.
+                //bool spanLeft = false;
+                //bool spanRight = false;
+
+                // Checks the pixels next to the current pixel to see if any of them have the same color, if yes, push them to the pixel stack.
+                while (y1 < bmp.Height && euclideanDistance(bmp.GetPixel(temp.X, y1), targetColor) <= threshold)
+                {
+                    bmp.SetPixel(temp.X, y1, replacementColor);
+
+                    if (temp.X > 0 && euclideanDistance(bmp.GetPixel(temp.X - 1, y1), targetColor) <= threshold)
+                    {
+                        if (bmp.GetPixel(temp.X - 1, y1).ToArgb() != replacementColor.ToArgb())
+                        {
+                            pixels.Push(new Point(temp.X - 1, y1));
+                            //spanLeft = true;
+                        }
+                    }
+                    //else if (spanLeft && temp.X > 0 && euclideanDistance(bmp.GetPixel(temp.X - 1, y1), targetColor) > threshold)
+                    //{
+                    //    spanLeft = false;
+                    //}
+                    if (temp.X < bmp.Width - 1 && euclideanDistance(bmp.GetPixel(temp.X + 1, y1), targetColor) <= threshold)
+                    {
+                        if (bmp.GetPixel(temp.X + 1, y1).ToArgb() != replacementColor.ToArgb())
+                        {
+                            pixels.Push(new Point(temp.X + 1, y1));
+                            //spanRight = true;
+                        }
+                    }
+                    //else if (spanRight && temp.X < bmp.Width - 1 && euclideanDistance(bmp.GetPixel(temp.X + 1, y1), targetColor) > threshold)
+                    //{
+                    //    spanRight = false;
+                    //}
+                    y1++;
+                }
+            }
+            pcbox.Image = bmp;
+        }
+
+        public static double euclideanDistance(Color pixel, Color target)
+        {
+            // Caculate the Euclidean distance between the colors in the RGB color space.
+            double distance = Math.Sqrt(Math.Pow(pixel.R - target.R, 2) + Math.Pow(pixel.G - target.G, 2) + Math.Pow(pixel.B - target.B, 2));
+            return distance;
+        }
+    }
+}

@@ -1,0 +1,193 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using KantoorApplicatie.Models;
+using KantoorApplicatie.Controllers;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+
+namespace KantoorApplicatie.Views
+{
+    public partial class DesignPanel : UserControl 
+    {
+        private DesignPanelController rc;
+
+        private Room room;
+        public float roomX;
+        public float roomY;
+        public float scale;
+        private Bitmap test;
+        public Room rDesign 
+            {
+            get { return room; }
+            set { room = value; test = null;  Invalidate();
+            }
+        }
+        public DesignPanel() 
+        {
+            InitializeComponent();
+            rc = new DesignPanelController(this);
+        }
+
+        protected override void OnPaint(PaintEventArgs e) 
+        {
+            Graphics g = e.Graphics;
+
+            // Draw rooms.
+            if (room != null)
+            {
+                scale = rc.CalculateScale();
+                // Values to get the center of the screen
+                roomX = (Width / 2) - (room.newWidth / 2);
+                roomY = (Height / 2) - (room.newHeight / 2);
+                Pen p = new Pen(Color.Black, 2);
+                Rectangle rect = new Rectangle((int)roomX, (int)roomY, (int)room.newWidth, (int)room.newHeight);
+                if (test == null)
+                {
+                    test = new Bitmap(Width, Height);
+                    using (Graphics k = Graphics.FromImage(test))
+                    {
+                        for (int x = rect.X; x < rect.Right; x += room.floorType.GetImage().Width)
+                        {
+                            for (int y = rect.Y; y < rect.Bottom; y += room.floorType.GetImage().Height)
+                            {
+                                Rectangle drawRect = new Rectangle(x, y, Math.Min(room.floorType.GetImage().Width, rect.Right - x),
+                                               Math.Min(room.floorType.GetImage().Height, rect.Bottom - y));
+                                Rectangle imageRect = new Rectangle(0, 0, drawRect.Width, drawRect.Height);
+
+                                k.DrawImage(room.floorType.GetImage(), drawRect, imageRect, GraphicsUnit.Pixel);
+                            }
+                        }
+                    }
+                    //test.Save(@"D:\TestDrawToBitmap.bmp", ImageFormat.Bmp);
+
+                }
+                g.DrawImage(test, 0,0);
+                
+                if (room.shape == "Circle")
+                {
+                    var rgn = new Region(new Rectangle((int)roomX, (int)roomY, (int)room.newWidth, (int)room.newHeight));
+                    var path = new GraphicsPath();
+                    path.AddEllipse(roomX, roomY, room.newWidth, room.newHeight);
+                    rgn.Exclude(path);
+                    e.Graphics.FillRegion(Brushes.Blue, rgn);
+                }
+                
+                g.DrawString(String.Format("{0} m", (float)room.width / 100), new Font("Arial", 10), p.Brush, roomX + (room.newWidth / 2), roomY + room.newHeight + 10);
+                g.DrawString(String.Format("{0} m", (float)room.height / 100), new Font("Arial", 10), p.Brush, roomX - 30, roomY + (room.newHeight / 2));
+
+
+                // Draws products.
+                for (int i = 0; i < room.productList.Count; i++)
+                {
+                    Bitmap tempImage = new Bitmap(room.productList[i].GetImage(), new Size(room.productList[i].GetScaledWidth(scale), room.productList[i].GetScaledHeight(scale)));
+                    g.DrawImage(tempImage, room.productList[i].location);
+                }
+            }
+        }
+
+        public void AddProduct(Product p) 
+        {
+            room.productList.Add(p);
+        }
+
+        public void DeleteProduct(Product p) 
+        {
+            room.productList.Remove(p);
+        }
+
+        public void MoveProduct(Product p) 
+        {
+            movingProduct = p;
+            MouseMove += Drag;
+        }
+        public void ClearNonActiveProducts() 
+        {
+            List<Product> clearedProductList = new List<Product>();
+            foreach(Product p in room.productList) {
+                if (p.active) 
+                {
+                    clearedProductList.Add(p);
+                }
+            }
+            room.productList = clearedProductList;
+            Invalidate();
+        }
+
+        private Product movingProduct;
+
+        public void Drag(object sender, MouseEventArgs m)
+        {
+            if (m.Button == MouseButtons.Left)
+            {
+                if(room != null && MousePosition.X - (movingProduct.GetScaledWidth(scale) / 2) > roomX && MousePosition.X + (movingProduct.GetScaledWidth(scale) / 2) < (roomX + room.newWidth) && MousePosition.Y - (movingProduct.GetScaledHeight(scale) / 2) - (movingProduct.GetScaledHeight(scale) / 2) > roomY && MousePosition.Y + (movingProduct.GetScaledHeight(scale)) - 100 < (roomY + room.newHeight))
+                {
+                    movingProduct.SetLocation(MousePosition.X - ((movingProduct.GetScaledWidth(scale) / 2)), MousePosition.Y - ((movingProduct.GetScaledHeight(scale) / 2)) - ((movingProduct.GetScaledHeight(scale) / 2)));
+                    Controls.Remove(movingProduct.rp);
+                    Invalidate();
+                }
+            }
+            if(m.Button == MouseButtons.None)
+            {
+                MouseMove -= Drag;
+            }
+        }
+        // Redraw screen when size changes.
+        private void DesignPanel_ClientSizeChanged(object sender, EventArgs e)
+        {
+            Invalidate();
+        }
+
+        private void DesignPanel_MouseDown(object sender, MouseEventArgs e)
+        {
+            Point relativePoint = PointToClient(Cursor.Position);
+            for (int i = 0; i < room.productList.Count; i++)
+            {
+                if (relativePoint.X >= room.productList[i].location.X &&
+                    relativePoint.X <= (room.productList[i].location.X + room.productList[i].GetScaledWidth(scale)) && 
+                    relativePoint.Y >= room.productList[i].location.Y &&
+                    relativePoint.Y <= (room.productList[i].location.Y + room.productList[i].GetScaledHeight(scale)))
+                {
+                    Cursor.Current = Cursors.Hand;
+                    MoveProduct(room.productList[i]);
+                }
+            }
+        }
+
+        private void DesignPanel_MouseClick(object sender, MouseEventArgs e)
+        {
+            Point relativePoint = PointToClient(Cursor.Position);
+            for (int i = 0; i < room.productList.Count; i++)
+            {
+                if (relativePoint.X >= room.productList[i].location.X &&
+                    relativePoint.X <= (room.productList[i].location.X + room.productList[i].GetScaledWidth(scale)) &&
+                    relativePoint.Y >= room.productList[i].location.Y &&
+                    relativePoint.Y <= (room.productList[i].location.Y + room.productList[i].GetScaledHeight(scale)))
+                {
+                    room.productList[i].rp.Location = new Point(room.productList[i].location.X, room.productList[i].location.Y - 25);
+                    
+                    Controls.Add(room.productList[i].rp);
+                    Invalidate();
+                }
+                else
+                {
+                    Controls.Remove(room.productList[i].rp);
+                }
+            }
+        }
+        // When the mouse leaves the design panel, clear the RotatePanel controls.
+        private void DesignPanel_MouseLeave(object sender, EventArgs e)
+        {
+            if(this.GetChildAtPoint(this.PointToClient(MousePosition)) == null)
+            {
+                Controls.Clear();
+            }
+        }
+    }
+}

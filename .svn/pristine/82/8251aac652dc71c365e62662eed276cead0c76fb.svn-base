@@ -1,0 +1,158 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Drawing.Drawing2D;
+
+namespace KantoorApplicatie.Views
+{
+    public partial class RoomMaker : UserControl
+    {
+        private List<Line> lines;
+        private List<Point> points;
+        private Pen p;
+        private bool intersects, saved;
+
+        public RoomMaker()
+        {
+            InitializeComponent();
+            lines = new List<Line>();
+            points = new List<Point>();
+            p = new Pen(Color.Black, 6);
+            intersects = false;
+            saved = false;
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+
+            GraphicsPath gPath = new GraphicsPath();
+            Bitmap tempImage = Properties.Resources.WoodFloor;
+            if(points.Count > 0)
+            {
+                Graphics g = e.Graphics;
+                p.Color = Color.Black;
+                // Add lines to graphics path.
+                foreach (Line l in lines)
+                {
+                    gPath.AddLine(l.point1,l.point2);
+                    //g.DrawLine(p, l.point1, l.point2);
+                }
+                // Add points to graphics path.
+                foreach (Point point in points)
+                {
+                    gPath.AddEllipse(point.X - 3, point.Y - 3, 6, 6);
+                }
+                g.DrawPath(p, gPath);
+                if (intersects)
+                {
+                    Rectangle rect = new Rectangle(0,0,1000,1000);
+                    g.SetClip(gPath, CombineMode.Replace);
+                    for (int y = rect.Y; y < rect.Bottom; y += tempImage.Height)
+                    {
+                        for (int x = rect.X; x < rect.Right; x += tempImage.Width)
+                        {
+                            Rectangle drawRect = new Rectangle(x, y, Math.Min(tempImage.Width, rect.Right - x),
+                                           Math.Min(tempImage.Height, rect.Bottom - y));
+                            Rectangle imageRect = new Rectangle(0, 0, drawRect.Width, drawRect.Height);
+
+                            g.DrawImage(tempImage, drawRect, imageRect, GraphicsUnit.Pixel);
+                        }
+                    }
+                    p.Color = Color.Transparent;
+                    g.FillRectangle(p.Brush, rect);
+                }
+            }
+        }
+
+        // Create a point when clicked, draw a line between points if there are atleast 2 points.
+        private void RoomMaker_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (!saved)
+            {
+                if (points.Count == 0)
+                {
+                    points.Add(PointToClient(Cursor.Position));
+                }
+                else
+                {
+                    Point point2 = PointToClient(Cursor.Position);
+                    lines.Add(new Line(points[points.Count - 1], point2));
+                    points.Add(point2);
+                }
+                Invalidate();
+            }
+        }
+
+        // Empties all list to start over.
+        private void restartButton_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Weet u het zeker?", "Opnieuw beginnen", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                lines = new List<Line>();
+                points = new List<Point>();
+                intersects = false;
+                saved = false;
+                Invalidate();
+            }
+            
+        }
+        // Remove last created point/line.
+        private void undoLast_Click(object sender, EventArgs e)
+        {
+            if(points.Count > 0)
+            {
+                if (lines.Count > 0)
+                {
+                    lines.Remove(lines[lines.Count - 1]);
+                }
+                points.Remove(points[points.Count - 1]);
+                intersects = false;
+                saved = false;
+                Invalidate();
+            }
+        }
+
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+            // find intersecting points;
+            foreach(Point p in points)
+            {
+                // Create list of points without selected point.
+                List<Point> temp = points.FindAll(v => v != p);
+                foreach(Point tp in temp)
+                {
+                    // Hitbox to see when points hit eachother.
+                    if ((p.X-5 <= tp.X && p.X+5 >= tp.X) && (p.Y - 5 <= tp.Y && p.Y + 5 >= tp.Y))
+                    {
+                        intersects = true;
+                        break;
+                    }
+                }
+            }
+            // Now fill the area between the lines.
+            if (intersects)
+            {
+                saved = true;
+                Invalidate();
+            }
+        }
+    }
+    // Use struct to save 2 points in 1 variable.
+    public struct Line
+    {
+        public Point point1;
+        public Point point2;
+        public Line(Point p1 , Point p2)
+        {
+            point1 = p1;
+            point2 = p2;
+        }
+    }
+}

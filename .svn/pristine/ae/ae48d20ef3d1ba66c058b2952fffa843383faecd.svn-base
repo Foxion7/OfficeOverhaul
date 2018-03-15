@@ -1,0 +1,93 @@
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using KantoorApplicatie.Views;
+using System.Collections.Generic;
+using KantoorApplicatie.Controllers;
+using KantoorApplicatie.Models;
+using KantoorApplicatie.Db;
+using System.Drawing;
+using System.Linq;
+
+namespace UnitTestKantoorApplicatie
+{
+    [TestClass]
+    public class CatalogTests
+    {
+        Product p = DatabaseController.GetProducts()[0];
+        [TestMethod]
+        public void RemoveNonSearchedProducts_ShouldReturnListWithProductsThatHaveTheCatalogsSearchTermInTheirName_WhenGivenListOfProducts() {
+            // Arrange
+            List<Product> productList = new List<Product> {
+                new Chair("Hünke Tünke", "Een leren stoel", 30, 30, 49.99, "unitTestImage.bmp"),
+                new Sofa("Hanke hunke", "Een gele bank", 40, 80, 79.99,  "unitTestImage.bmp"),
+                new Chair("Hünke Tünke", "Een leren stoel", 30, 30, 49.99,  "unitTestImage.bmp")
+            };
+            CatalogPanel cp = new CatalogPanel();
+            string searchString = "T";
+
+            // Act
+            cp.InstantiateProductList(productList, new DesignPanel());
+            CatalogController cc = cp.catalogController;
+            cc.currentSearch = searchString;
+            cc.RefreshDisplayedItems();
+
+            // Assert
+            foreach (CatalogProductPanel pp in cc.productPanelList) {
+                Assert.IsTrue(pp.product.name.Contains(searchString));
+            }
+        }
+
+        [TestMethod]
+        public void RemoveNonSortedProducts_ShouldReturnListWithProductsThatHaveTheCatalogsSortTermAsTheirType_WhenGivenListOfProducts() {
+
+            // Arrange
+            List<Product> productList = new List<Product> {
+                new Chair("Hünke Tünke", "Een leren stoel", 30, 30, 49.99,  "unitTestImage.bmp"),
+                new Sofa("Hanke hunke", "Een gele bank", 40, 80, 79.99,  "unitTestImage.bmp"),
+                new Chair("Hünke Tünke", "Een leren stoel", 30, 30, 49.99,  "unitTestImage.bmp")
+            };
+            CatalogPanel cp = new CatalogPanel();
+            string sortString = "Sofa";
+
+            // Act
+            cp.InstantiateProductList(productList, new DesignPanel());
+            CatalogController cc = cp.catalogController;
+            cc.currentSorting = sortString;
+            cc.RefreshDisplayedItems();
+            cc.OrderProducts(productList);
+
+            // Assert
+            foreach(CatalogProductPanel pp in cc.productPanelList) {
+                Assert.IsTrue(pp.product.GetType().ToString() == "KantoorApplicatie.Models." + sortString);
+            }
+        }
+
+
+        [TestMethod]
+        public void OrderProducts_ShouldOrdersAllProductsInOrderOfCatalogsOrdering_WhenGivenListOfProducts() {
+
+            // Arrange
+            List<Product> productList = new List<Product> {
+                new Chair("Hünke Tünke", "Een leren stoel", 30, 30, 49.99,  "unitTestImage.bmp"),
+                new Sofa("Hanke hunke", "Een gele bank", 40, 80, 79.99,  "unitTestImage.bmp"),
+                new Chair("Hünke Tünke", "Een leren stoel", 30, 30, 49.99,  "unitTestImage.bmp")
+            };
+            CatalogPanel cp = new CatalogPanel();
+            string orderString = "Naam: A-Z";
+
+            // Act
+            cp.InstantiateProductList(productList, new DesignPanel());
+            CatalogController cc = cp.catalogController;
+            cc.currentOrdering = orderString;
+
+            List<Product> expectedList = new List<Product>();
+            expectedList = productList.OrderBy(x => x.name).ToList();
+            cc.RefreshDisplayedItems();
+
+            // Assert
+            for (int i = 0; i < cc.productPanelList.Count; i++){
+                Assert.AreEqual(cc.productPanelList[i].product, expectedList[i]);
+            }
+        }
+    }
+}

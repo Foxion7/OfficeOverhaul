@@ -1,0 +1,40 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using KantoorApplicatie.Views;
+namespace KantoorApplicatie.Controllers
+{
+    class DesignPanelController
+    {
+        private DesignPanel dp;
+        public DesignPanelController(DesignPanel dp)
+        {
+            this.dp = dp;
+        }
+        // Calculate the scale of the room and the images
+        public float CalculateScale()
+        {
+            float scale = 1;
+            // If the room.height is bigger than the room.width
+            if (dp.rDesign.height >= dp.rDesign.width)
+            {
+                scale = dp.rDesign.height / (float)(dp.Height * 0.8);
+            }
+            else
+            {
+                // If the room.width is bigger than the room.height
+                scale = dp.rDesign.width / (float)(dp.Width * 0.8);
+                // If the scaled room.height is bigger than the screen height
+                if ((dp.rDesign.height / scale) > dp.Height)
+                {
+                    scale = dp.rDesign.height / (float)(dp.Height * 0.8);
+                }
+            }
+            dp.rDesign.newHeight = dp.rDesign.height / scale;
+            dp.rDesign.newWidth = dp.rDesign.width / scale;
+            return scale;
+        }
+    }
+}

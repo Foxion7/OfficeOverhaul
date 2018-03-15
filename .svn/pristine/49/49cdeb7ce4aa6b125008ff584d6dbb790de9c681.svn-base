@@ -1,0 +1,53 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using KantoorApplicatie.Models;
+
+namespace KantoorApplicatie.Views
+{
+    public partial class RotatePanel : UserControl
+    {
+        private Product p;
+        private DesignPanel dp;
+
+        public RotatePanel(Product p, DesignPanel dp)
+        {
+            this.p = p;
+            this.dp = dp;
+            InitializeComponent();
+        }
+
+        private void UpdatePanel()
+        {
+            dp.Invalidate();
+        }
+
+        // Rotate image to the left.
+        private void Left_Click(object sender, EventArgs e)
+        {
+            p.RotateImage(RotateFlipType.Rotate270FlipNone);
+            UpdatePanel();
+        }
+
+        // Rotate image to the right.
+        private void Right_Click(object sender, EventArgs e)
+        {
+            p.RotateImage(RotateFlipType.Rotate90FlipNone);
+            UpdatePanel();
+        }
+
+        // Delete product from the list of products.
+        private void Delete_Click(object sender, EventArgs e)
+        {
+            dp.DeleteProduct(p);
+            dp.Controls.Remove(p.rp);
+            UpdatePanel();
+        }
+    }
+}

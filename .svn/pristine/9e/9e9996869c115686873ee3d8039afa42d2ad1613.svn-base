@@ -1,0 +1,339 @@
+﻿using KantoorApplicatie.Controllers;
+using KantoorApplicatie.Db;
+using KantoorApplicatie.Models;
+using KantoorApplicatie.Models.Invoice;
+using KantoorApplicatie.Models.Theme;
+using KantoorApplicatie.Views.Themeforms;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace KantoorApplicatie.Views
+{
+    public partial class InvoiceForm : Form
+    {
+        private InvoiceController ic;
+        private Representative representative;
+        private Room room;
+        // Selected subtheme
+        private SubTheme selected;
+        // List of all customers
+        private List<Customer> customers = DatabaseController.customerList;
+        // Selected customer
+        private Customer customer;
+        // Used for selecting consumer from dropdownbox
+        private int customernr = -1;
+
+		public InvoiceForm(Room room, MainView mv)
+        {
+            if (mv.mm.customer != null)
+            {
+                this.customer = mv.mm.customer;
+                GetCustomernr();
+            }
+            InitializeComponent();
+            this.room = room;
+
+            using (var mc = new MyContext())
+            {
+                // getting used subtheme
+                this.selected = DatabaseController.getLastSubTheme();
+            }
+
+            // Sets date and gives a unique InvoiceLabel.
+            dateInvoiceDateLabel.Text = DateTime.Now.ToShortDateString();
+			intInvoiceNumberLabel.Text = (DatabaseController.invoiceList.Count + 1).ToString();
+            this.representative = DatabaseController.representativeList.First();
+            ic = new InvoiceController(invoiceListPanel1, room.productList);
+
+            ic.FillDisplayedProductList();
+            intInvoiceTotalPriceLabelprijsLabel.Text = ic.totalPrice.ToString();
+        }
+
+        // Setting customernr
+        private void GetCustomernr()
+        {
+            for (int i = 0; i < customers.Count; i++)
+            {
+                if (customers[i].companyName != customer.companyName && customers[i].name != customer.name && customers[i].department != customer.department)
+                {
+                    this.customernr = -1;
+                }
+                else { 
+                    this.customernr = i;
+                    return;
+                }
+            }
+        }
+
+        private bool CheckCustomer(Customer customer)
+        {
+            List<Customer> l = DatabaseController.customerList;
+            foreach (Customer c in l)
+            {
+                if(c.name == customer.name && c.companyName == customer.companyName && c.department == customer.department)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private void AddCustomer(Customer c)
+        {
+            DatabaseController.AddCustomer(c);
+        }
+        
+        public void ClearTextBoxes()
+        {
+            companyNameTextbox.Text = "";
+            nameTextbox.Text = "";
+            departmentTextbox.Text = "";
+            postalcodeTextbox.Text = "";
+            locationTextbox.Text = "";
+            adresTextbox.Text = "";
+            phonenumberTextbox.Text = "";
+            emailTextbox.Text = "";
+            kvkNumberTextbox.Text = "";
+            ibanTextbox.Text = "";
+        }
+
+        // Generates PDF.
+        private void generateButton_Click(object sender, EventArgs e)
+        {
+            Customer customer = null;
+
+            if (string.IsNullOrWhiteSpace(companyNameTextbox.Text) ||
+                string.IsNullOrWhiteSpace(nameTextbox.Text) ||
+                string.IsNullOrWhiteSpace(departmentTextbox.Text) ||
+                string.IsNullOrWhiteSpace(postalcodeTextbox.Text) ||
+                string.IsNullOrWhiteSpace(locationTextbox.Text) ||
+                string.IsNullOrWhiteSpace(phonenumberTextbox.Text) ||
+                string.IsNullOrWhiteSpace(emailTextbox.Text) ||
+                string.IsNullOrWhiteSpace(kvkNumberTextbox.Text) ||
+                string.IsNullOrWhiteSpace(ibanTextbox.Text))
+            {
+                MessageBox.Show("Vul alstublieft alle velden in.", "Foutmelding",
+                MessageBoxButtons.OK);
+            }
+            else
+            {
+                if (selected != null)
+                {
+                    customer = new Customer(
+                        companyNameTextbox.Text,
+                        nameTextbox.Text,
+                        departmentTextbox.Text,
+                        postalcodeTextbox.Text,
+                        locationTextbox.Text,
+                        adresTextbox.Text,
+                        phonenumberTextbox.Text,
+                        emailTextbox.Text,
+                        kvkNumberTextbox.Text,
+                        ibanTextbox.Text,
+                        selected.subThemeId
+                        );
+                } else
+                {
+                    customer = new Customer(
+                        companyNameTextbox.Text,
+                        nameTextbox.Text,
+                        departmentTextbox.Text,
+                        postalcodeTextbox.Text,
+                        locationTextbox.Text,
+                        adresTextbox.Text,
+                        phonenumberTextbox.Text,
+                        emailTextbox.Text,
+                        kvkNumberTextbox.Text,
+                        ibanTextbox.Text
+                        );
+                }
+                AddCustomer(customer);
+                FillExistingCustomerList();
+            }
+
+            // Adds Invoice to database.
+            //if (ic.productPanelList.Count > 0)
+            //{ }
+            //    bool exists = false;
+            //    foreach(Customer c in DatabaseController.customerList) 
+            //    {
+            //        if ((c.companyName + c.department + c.name).Equals((customer.companyName + customer.department + customer.name))) 
+            //        {
+            //            Console.WriteLine("Exist == true");
+            //            exists = true;
+            //        }
+            //    } 
+            //        if(!exists) 
+            //        {
+            //        Console.WriteLine("Exist == false");
+            //            DatabaseController.AddCustomer(customer);
+            //        }
+                InvoiceData invoice = new InvoiceData(customer, representative, DateTime.Parse(dateInvoiceDateLabel.Text), room);
+                DatabaseController.AddRoom(room);
+                DatabaseController.AddInvoice(invoice);
+                invoice = DatabaseController.invoiceList.Last();
+                foreach (InvoiceProductPanel ipp in ic.productPanelList) 
+                {
+                    DatabaseController.AddOrderedProduct(invoice.InvoiceDataId, ipp.product, ipp.amountOfCopies);
+                }
+                
+                ic.SetInfo(customer, representative, intInvoiceNumberLabel.Text.ToString(), room);
+                ic.MakePdf();
+                Close();
+            }
+        
+
+        // Fills combobox with previously created customers.
+        public void FillExistingCustomerList() 
+        {
+            customerComboBox.DataSource = DatabaseController.customerList;
+            customerComboBox.DisplayMember = "name";
+
+            customerComboBox.SelectedIndex = customernr;
+            if(customernr < 0)
+            {
+                ClearTextBoxes();
+            }
+        }
+
+
+        // Check for right values.
+        private void nameTextbox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(char.IsLetter(e.KeyChar) || char.IsSeparator(e.KeyChar) || e.KeyChar == (char)Keys.Back);
+        }
+
+        private void kvkTextbox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+        private void phoneNumberTextbox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+        
+        // Instantiates the lists of recommendations when filling Invoice Textboxes.
+        public void InstantiateAutocompleteLists() 
+        {
+            var companyNameList = new AutoCompleteStringCollection();
+            var nameList = new AutoCompleteStringCollection();
+            var departmentList = new AutoCompleteStringCollection();
+            var postalcodeList = new AutoCompleteStringCollection();
+            var locationList = new AutoCompleteStringCollection();
+            var adresList = new AutoCompleteStringCollection();
+            var phoneNumberList = new AutoCompleteStringCollection();
+            var emailList = new AutoCompleteStringCollection();
+            var kvkList = new AutoCompleteStringCollection();
+            var ibanList = new AutoCompleteStringCollection();
+
+            // Get all customerdata from database.
+            foreach (Customer customer in DatabaseController.customerList) 
+            {
+                companyNameList.Add(customer.companyName);
+                nameList.Add(customer.name);
+                departmentList.Add(customer.department);
+                postalcodeList.Add(customer.postalCode);
+                locationList.Add(customer.location);
+                adresList.Add(customer.adres);
+                phoneNumberList.Add(customer.phonenumber);
+                emailList.Add(customer.email);
+                kvkList.Add(customer.kvkNumber);
+                ibanList.Add(customer.iban);
+            }
+
+            // Link customerdata to recomendations.
+            companyNameTextbox.AutoCompleteCustomSource = companyNameList;
+            nameTextbox.AutoCompleteCustomSource = nameList;
+            departmentTextbox.AutoCompleteCustomSource = departmentList;
+            postalcodeTextbox.AutoCompleteCustomSource = postalcodeList;
+            locationTextbox.AutoCompleteCustomSource = locationList;
+            adresTextbox.AutoCompleteCustomSource = adresList;
+            phonenumberTextbox.AutoCompleteCustomSource = phoneNumberList;
+            emailTextbox.AutoCompleteCustomSource = emailList;
+            kvkNumberTextbox.AutoCompleteCustomSource = kvkList;
+            ibanTextbox.AutoCompleteCustomSource = ibanList;
+        }
+
+        // Fills textboxes when customer is selected from combobox.
+        private void customerComboBox_SelectedIndexChanged(object sender, EventArgs e) 
+        {
+            Customer currentCustomer = new Customer();
+            foreach(Customer customer in DatabaseController.customerList) 
+            {
+                if (customerComboBox.Text.Contains(customer.name) &&
+                    customerComboBox.Text.Contains(customer.department) &&
+                    customerComboBox.Text.Contains(customer.companyName)) 
+                {
+                    currentCustomer = customer;
+                    companyNameTextbox.Text = customer.companyName;
+                    nameTextbox.Text = customer.name;
+                    departmentTextbox.Text = customer.department;
+                    postalcodeTextbox.Text = customer.postalCode;
+                    locationTextbox.Text = customer.location;
+                    adresTextbox.Text = customer.adres;
+                    phonenumberTextbox.Text = customer.phonenumber;
+                    emailTextbox.Text = customer.email;
+                    kvkNumberTextbox.Text = customer.kvkNumber;
+                    ibanTextbox.Text = customer.iban;
+                }
+            }
+        }
+
+        private void ChangeDropDownWidth(int newWidth) {
+            customerComboBox.Width = newWidth;
+            //if (customerComboBox.DropDownWidth < ddw) {
+            //    customerComboBox.DropDownWidth = ddw;
+            //}
+        }
+
+        private int LongestName() {
+            int biggestLength = 0;
+            foreach (Customer c in DatabaseController.customerList) 
+            {
+                int fullNameLength = c.name.Length + c.department.Length + c.companyName.Length;
+                if ( fullNameLength > biggestLength) 
+                {
+                    biggestLength = fullNameLength;
+                }
+            }
+            return biggestLength;
+        }
+
+        private int DropDownWidth(string currentCustomer, ComboBox myCombo) 
+        {
+            int maxWidth = 0, temp = 0;
+                temp = TextRenderer.MeasureText(currentCustomer, myCombo.Font).Width;
+                if (temp > maxWidth) 
+                {
+                    maxWidth = temp;
+                }
+            return maxWidth;
+        }
+        
+
+        private void ExistingCustomersFormat(object sender, ListControlConvertEventArgs e) 
+        {
+            string name = ((Customer)e.ListItem).name;
+            string department = ((Customer)e.ListItem).department;
+            string companyName = ((Customer)e.ListItem).companyName;
+            e.Value = companyName + " " + department + " " + name;
+        }
+
+        private void customerComboBox_Click(object sender, EventArgs e) 
+        {
+        }
+
+        private void invoiceTitleLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
+}

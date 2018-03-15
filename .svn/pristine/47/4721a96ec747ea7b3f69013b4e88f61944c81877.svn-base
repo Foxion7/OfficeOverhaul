@@ -1,0 +1,30 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace KantoorApplicatie.Controllers
+{
+    public static class Converter
+    {
+        // Changes an image into a byte array
+        public static byte[] ImageToByteArray(Bitmap imageIn)
+        {
+            MemoryStream ms = new MemoryStream();
+            imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
+            return ms.ToArray();
+        }
+
+        // Changes a byte array into an image.
+        public static Bitmap ByteArrayToImage(byte[] byteArrayIn)
+        {
+            MemoryStream ms = new MemoryStream(byteArrayIn);
+            Bitmap returnImage = new Bitmap(Image.FromStream(ms));
+
+            return returnImage;
+        }
+    }
+}

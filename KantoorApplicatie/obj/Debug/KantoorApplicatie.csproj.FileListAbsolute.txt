@@ -1,0 +1,220 @@
+C:\Users\Lars\Desktop\HuidigeProject\KantoorApplicatie\bin\Debug\KantoorApplicatie.exe.config
+C:\Users\Lars\Desktop\HuidigeProject\KantoorApplicatie\bin\Debug\KantoorApplicatie.exe
+C:\Users\Lars\Desktop\HuidigeProject\KantoorApplicatie\bin\Debug\KantoorApplicatie.pdb
+C:\Users\Lars\Desktop\HuidigeProject\KantoorApplicatie\bin\Debug\EntityFramework.dll
+C:\Users\Lars\Desktop\HuidigeProject\KantoorApplicatie\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Lars\Desktop\HuidigeProject\KantoorApplicatie\bin\Debug\PdfSharp.Charting.dll
+C:\Users\Lars\Desktop\HuidigeProject\KantoorApplicatie\bin\Debug\PdfSharp.dll
+C:\Users\Lars\Desktop\HuidigeProject\KantoorApplicatie\bin\Debug\EntityFramework.xml
+C:\Users\Lars\Desktop\HuidigeProject\KantoorApplicatie\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Lars\Desktop\HuidigeProject\KantoorApplicatie\bin\Debug\PdfSharp.xml
+C:\Users\Lars\Desktop\HuidigeProject\KantoorApplicatie\bin\Debug\PdfSharp.Charting.xml
+C:\Users\Lars\Desktop\HuidigeProject\KantoorApplicatie\bin\Debug\de\PdfSharp.resources.dll
+C:\Users\Lars\Desktop\HuidigeProject\KantoorApplicatie\bin\Debug\de\PdfSharp.Charting.resources.dll
+C:\Users\Lars\Desktop\HuidigeProject\KantoorApplicatie\obj\Debug\KantoorApplicatie.csprojResolveAssemblyReference.cache
+C:\Users\Lars\Desktop\HuidigeProject\KantoorApplicatie\obj\Debug\KantoorApplicatie.Properties.Resources.resources
+C:\Users\Lars\Desktop\HuidigeProject\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.DesignPanel.resources
+C:\Users\Lars\Desktop\HuidigeProject\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.InvoiceManager.InvoiceManagerForm.resources
+C:\Users\Lars\Desktop\HuidigeProject\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.InvoiceManager.InvoiceManagerItem.resources
+C:\Users\Lars\Desktop\HuidigeProject\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.InvoiceManager.InvoiceManagerList.resources
+C:\Users\Lars\Desktop\HuidigeProject\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.InvoiceForm.resources
+C:\Users\Lars\Desktop\HuidigeProject\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.Invoice.InvoiceListPanel.resources
+C:\Users\Lars\Desktop\HuidigeProject\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.InvoiceProductPanel.resources
+C:\Users\Lars\Desktop\HuidigeProject\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.Invoice.RepresentativeForm.resources
+C:\Users\Lars\Desktop\HuidigeProject\KantoorApplicatie\obj\Debug\KantoorApplicatie.MainView.resources
+C:\Users\Lars\Desktop\HuidigeProject\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.MainMenu.resources
+C:\Users\Lars\Desktop\HuidigeProject\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.CatalogListPanel.resources
+C:\Users\Lars\Desktop\HuidigeProject\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.CatalogProductPanel.resources
+C:\Users\Lars\Desktop\HuidigeProject\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.RotatePanel.resources
+C:\Users\Lars\Desktop\HuidigeProject\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.ThemeForm.resources
+C:\Users\Lars\Desktop\HuidigeProject\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.CatalogPanel.resources
+C:\Users\Lars\Desktop\HuidigeProject\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.ShapeSelector.resources
+C:\Users\Lars\Desktop\HuidigeProject\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.Themeforms.ThemeImageForm.resources
+C:\Users\Lars\Desktop\HuidigeProject\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.Themeforms.ThemeImageFormSave.resources
+C:\Users\Lars\Desktop\HuidigeProject\KantoorApplicatie\obj\Debug\KantoorApplicatie.csproj.GenerateResource.Cache
+C:\Users\Lars\Desktop\HuidigeProject\KantoorApplicatie\obj\Debug\KantoorApplicatie.csproj.CoreCompileInputs.cache
+C:\Users\Lars\Desktop\HuidigeProject\KantoorApplicatie\obj\Debug\KantoorApplicatie.exe
+C:\Users\Lars\Desktop\HuidigeProject\KantoorApplicatie\obj\Debug\KantoorApplicatie.pdb
+C:\Users\Lars\Desktop\HuidigeProject\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.RemoveProductForm.resources
+C:\Users\Lars\Desktop\HuidigeProject\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.NewProductForm.resources
+C:\Users\Lars\Desktop\HuidigeProject\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.Themeforms.ThemeImageDeleteForm.resources
+C:\Users\Lars\Desktop\HuidigeProject\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.RoomMaker.resources
+C:\Users\Lars\Desktop\HuidigeProject\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.ChooseFloor.resources
+C:\Users\Lars\Desktop\HuidigeProject\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.saveRoom.resources
+C:\Users\Lars\Desktop\HuidigeProject\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.CustomerForm.resources
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\KantoorApplicatie\bin\Debug\KantoorApplicatie.exe.config
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\KantoorApplicatie\bin\Debug\KantoorApplicatie.exe
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\KantoorApplicatie\bin\Debug\KantoorApplicatie.pdb
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\KantoorApplicatie\bin\Debug\EntityFramework.dll
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\KantoorApplicatie\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\KantoorApplicatie\bin\Debug\PdfSharp.Charting.dll
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\KantoorApplicatie\bin\Debug\PdfSharp.dll
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\KantoorApplicatie\bin\Debug\EntityFramework.xml
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\KantoorApplicatie\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\KantoorApplicatie\bin\Debug\PdfSharp.xml
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\KantoorApplicatie\bin\Debug\PdfSharp.Charting.xml
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\KantoorApplicatie\bin\Debug\de\PdfSharp.resources.dll
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\KantoorApplicatie\bin\Debug\de\PdfSharp.Charting.resources.dll
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\KantoorApplicatie\obj\Debug\KantoorApplicatie.Properties.Resources.resources
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.ChooseFloor.resources
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.CustomerForm.resources
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.DesignPanel.resources
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.InvoiceManager.InvoiceManagerForm.resources
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.InvoiceManager.InvoiceManagerItem.resources
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.InvoiceManager.InvoiceManagerList.resources
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.InvoiceForm.resources
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.Invoice.InvoiceListPanel.resources
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.InvoiceProductPanel.resources
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.RemoveProductForm.resources
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.Invoice.RepresentativeForm.resources
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\KantoorApplicatie\obj\Debug\KantoorApplicatie.MainView.resources
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.MainMenu.resources
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.NewProductForm.resources
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.CatalogListPanel.resources
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.CatalogProductPanel.resources
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.RoomMaker.resources
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.RotatePanel.resources
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.SaveRoom.resources
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.ThemeForm.resources
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.CatalogPanel.resources
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.ShapeSelector.resources
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.Themeforms.ThemeImageDeleteForm.resources
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.Themeforms.ThemeImageForm.resources
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.Themeforms.ThemeImageFormSave.resources
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\KantoorApplicatie\obj\Debug\KantoorApplicatie.csproj.GenerateResource.Cache
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\KantoorApplicatie\obj\Debug\KantoorApplicatie.csproj.CoreCompileInputs.cache
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\KantoorApplicatie\obj\Debug\KantoorApplicatie.exe
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\KantoorApplicatie\obj\Debug\KantoorApplicatie.pdb
+C:\Users\Lars\Desktop\HuidigeProject - BACKUPPP\KantoorApplicatie\obj\Debug\KantoorApplicatie.csprojResolveAssemblyReference.cache
+C:\Users\Lars\Desktop\KBS2-Project\KantoorApplicatie\bin\Debug\KantoorApplicatie.exe.config
+C:\Users\Lars\Desktop\KBS2-Project\KantoorApplicatie\bin\Debug\KantoorApplicatie.exe
+C:\Users\Lars\Desktop\KBS2-Project\KantoorApplicatie\bin\Debug\KantoorApplicatie.pdb
+C:\Users\Lars\Desktop\KBS2-Project\KantoorApplicatie\bin\Debug\EntityFramework.dll
+C:\Users\Lars\Desktop\KBS2-Project\KantoorApplicatie\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Lars\Desktop\KBS2-Project\KantoorApplicatie\bin\Debug\PdfSharp.Charting.dll
+C:\Users\Lars\Desktop\KBS2-Project\KantoorApplicatie\bin\Debug\PdfSharp.dll
+C:\Users\Lars\Desktop\KBS2-Project\KantoorApplicatie\bin\Debug\EntityFramework.xml
+C:\Users\Lars\Desktop\KBS2-Project\KantoorApplicatie\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Lars\Desktop\KBS2-Project\KantoorApplicatie\bin\Debug\PdfSharp.xml
+C:\Users\Lars\Desktop\KBS2-Project\KantoorApplicatie\bin\Debug\PdfSharp.Charting.xml
+C:\Users\Lars\Desktop\KBS2-Project\KantoorApplicatie\bin\Debug\de\PdfSharp.resources.dll
+C:\Users\Lars\Desktop\KBS2-Project\KantoorApplicatie\bin\Debug\de\PdfSharp.Charting.resources.dll
+C:\Users\Lars\Desktop\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.csprojResolveAssemblyReference.cache
+C:\Users\Lars\Desktop\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Properties.Resources.resources
+C:\Users\Lars\Desktop\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.ChooseFloor.resources
+C:\Users\Lars\Desktop\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.CustomerForm.resources
+C:\Users\Lars\Desktop\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.DesignPanel.resources
+C:\Users\Lars\Desktop\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.InvoiceManager.InvoiceManagerForm.resources
+C:\Users\Lars\Desktop\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.InvoiceManager.InvoiceManagerItem.resources
+C:\Users\Lars\Desktop\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.InvoiceManager.InvoiceManagerList.resources
+C:\Users\Lars\Desktop\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.InvoiceForm.resources
+C:\Users\Lars\Desktop\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.Invoice.InvoiceListPanel.resources
+C:\Users\Lars\Desktop\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.InvoiceProductPanel.resources
+C:\Users\Lars\Desktop\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.RemoveProductForm.resources
+C:\Users\Lars\Desktop\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.Invoice.RepresentativeForm.resources
+C:\Users\Lars\Desktop\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.MainView.resources
+C:\Users\Lars\Desktop\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.MainMenu.resources
+C:\Users\Lars\Desktop\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.NewProductForm.resources
+C:\Users\Lars\Desktop\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.CatalogListPanel.resources
+C:\Users\Lars\Desktop\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.CatalogProductPanel.resources
+C:\Users\Lars\Desktop\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.RoomMaker.resources
+C:\Users\Lars\Desktop\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.RotatePanel.resources
+C:\Users\Lars\Desktop\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.SaveRoom.resources
+C:\Users\Lars\Desktop\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.ThemeForm.resources
+C:\Users\Lars\Desktop\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.CatalogPanel.resources
+C:\Users\Lars\Desktop\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.ShapeSelector.resources
+C:\Users\Lars\Desktop\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.Themeforms.ThemeImageDeleteForm.resources
+C:\Users\Lars\Desktop\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.Themeforms.ThemeImageForm.resources
+C:\Users\Lars\Desktop\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.Themeforms.ThemeImageFormSave.resources
+C:\Users\Lars\Desktop\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.csproj.GenerateResource.Cache
+C:\Users\Lars\Desktop\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.csproj.CoreCompileInputs.cache
+C:\Users\Lars\Desktop\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.exe
+C:\Users\Lars\Desktop\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.pdb
+C:\Users\Lars\Google Drive\BES07-01\KBS2\Inlevermap\Code\KBS2-Project\KantoorApplicatie\bin\Debug\KantoorApplicatie.exe.config
+C:\Users\Lars\Google Drive\BES07-01\KBS2\Inlevermap\Code\KBS2-Project\KantoorApplicatie\bin\Debug\KantoorApplicatie.exe
+C:\Users\Lars\Google Drive\BES07-01\KBS2\Inlevermap\Code\KBS2-Project\KantoorApplicatie\bin\Debug\KantoorApplicatie.pdb
+C:\Users\Lars\Google Drive\BES07-01\KBS2\Inlevermap\Code\KBS2-Project\KantoorApplicatie\bin\Debug\EntityFramework.dll
+C:\Users\Lars\Google Drive\BES07-01\KBS2\Inlevermap\Code\KBS2-Project\KantoorApplicatie\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Lars\Google Drive\BES07-01\KBS2\Inlevermap\Code\KBS2-Project\KantoorApplicatie\bin\Debug\PdfSharp.Charting.dll
+C:\Users\Lars\Google Drive\BES07-01\KBS2\Inlevermap\Code\KBS2-Project\KantoorApplicatie\bin\Debug\PdfSharp.dll
+C:\Users\Lars\Google Drive\BES07-01\KBS2\Inlevermap\Code\KBS2-Project\KantoorApplicatie\bin\Debug\EntityFramework.xml
+C:\Users\Lars\Google Drive\BES07-01\KBS2\Inlevermap\Code\KBS2-Project\KantoorApplicatie\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Lars\Google Drive\BES07-01\KBS2\Inlevermap\Code\KBS2-Project\KantoorApplicatie\bin\Debug\PdfSharp.xml
+C:\Users\Lars\Google Drive\BES07-01\KBS2\Inlevermap\Code\KBS2-Project\KantoorApplicatie\bin\Debug\PdfSharp.Charting.xml
+C:\Users\Lars\Google Drive\BES07-01\KBS2\Inlevermap\Code\KBS2-Project\KantoorApplicatie\bin\Debug\de\PdfSharp.resources.dll
+C:\Users\Lars\Google Drive\BES07-01\KBS2\Inlevermap\Code\KBS2-Project\KantoorApplicatie\bin\Debug\de\PdfSharp.Charting.resources.dll
+C:\Users\Lars\Google Drive\BES07-01\KBS2\Inlevermap\Code\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.csprojResolveAssemblyReference.cache
+C:\Users\Lars\Google Drive\BES07-01\KBS2\Inlevermap\Code\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Properties.Resources.resources
+C:\Users\Lars\Google Drive\BES07-01\KBS2\Inlevermap\Code\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.ChooseFloor.resources
+C:\Users\Lars\Google Drive\BES07-01\KBS2\Inlevermap\Code\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.CustomerForm.resources
+C:\Users\Lars\Google Drive\BES07-01\KBS2\Inlevermap\Code\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.DesignPanel.resources
+C:\Users\Lars\Google Drive\BES07-01\KBS2\Inlevermap\Code\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.InvoiceManager.InvoiceManagerForm.resources
+C:\Users\Lars\Google Drive\BES07-01\KBS2\Inlevermap\Code\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.InvoiceManager.InvoiceManagerItem.resources
+C:\Users\Lars\Google Drive\BES07-01\KBS2\Inlevermap\Code\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.InvoiceManager.InvoiceManagerList.resources
+C:\Users\Lars\Google Drive\BES07-01\KBS2\Inlevermap\Code\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.InvoiceForm.resources
+C:\Users\Lars\Google Drive\BES07-01\KBS2\Inlevermap\Code\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.Invoice.InvoiceListPanel.resources
+C:\Users\Lars\Google Drive\BES07-01\KBS2\Inlevermap\Code\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.InvoiceProductPanel.resources
+C:\Users\Lars\Google Drive\BES07-01\KBS2\Inlevermap\Code\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.RemoveProductForm.resources
+C:\Users\Lars\Google Drive\BES07-01\KBS2\Inlevermap\Code\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.Invoice.RepresentativeForm.resources
+C:\Users\Lars\Google Drive\BES07-01\KBS2\Inlevermap\Code\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.MainView.resources
+C:\Users\Lars\Google Drive\BES07-01\KBS2\Inlevermap\Code\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.MainMenu.resources
+C:\Users\Lars\Google Drive\BES07-01\KBS2\Inlevermap\Code\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.NewProductForm.resources
+C:\Users\Lars\Google Drive\BES07-01\KBS2\Inlevermap\Code\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.CatalogListPanel.resources
+C:\Users\Lars\Google Drive\BES07-01\KBS2\Inlevermap\Code\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.CatalogProductPanel.resources
+C:\Users\Lars\Google Drive\BES07-01\KBS2\Inlevermap\Code\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.RoomMaker.resources
+C:\Users\Lars\Google Drive\BES07-01\KBS2\Inlevermap\Code\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.RotatePanel.resources
+C:\Users\Lars\Google Drive\BES07-01\KBS2\Inlevermap\Code\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.SaveRoom.resources
+C:\Users\Lars\Google Drive\BES07-01\KBS2\Inlevermap\Code\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.ThemeForm.resources
+C:\Users\Lars\Google Drive\BES07-01\KBS2\Inlevermap\Code\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.CatalogPanel.resources
+C:\Users\Lars\Google Drive\BES07-01\KBS2\Inlevermap\Code\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.ShapeSelector.resources
+C:\Users\Lars\Google Drive\BES07-01\KBS2\Inlevermap\Code\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.Themeforms.ThemeImageDeleteForm.resources
+C:\Users\Lars\Google Drive\BES07-01\KBS2\Inlevermap\Code\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.Themeforms.ThemeImageForm.resources
+C:\Users\Lars\Google Drive\BES07-01\KBS2\Inlevermap\Code\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.Themeforms.ThemeImageFormSave.resources
+C:\Users\Lars\Google Drive\BES07-01\KBS2\Inlevermap\Code\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.csproj.GenerateResource.Cache
+C:\Users\Lars\Google Drive\BES07-01\KBS2\Inlevermap\Code\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.csproj.CoreCompileInputs.cache
+C:\Users\Lars\Google Drive\BES07-01\KBS2\Inlevermap\Code\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.exe
+C:\Users\Lars\Google Drive\BES07-01\KBS2\Inlevermap\Code\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.pdb
+C:\Users\Laptop Roeland\Documents\Visual Studio 2017\Projects\KBS2-Project\KantoorApplicatie\bin\Debug\KantoorApplicatie.exe.config
+C:\Users\Laptop Roeland\Documents\Visual Studio 2017\Projects\KBS2-Project\KantoorApplicatie\bin\Debug\KantoorApplicatie.exe
+C:\Users\Laptop Roeland\Documents\Visual Studio 2017\Projects\KBS2-Project\KantoorApplicatie\bin\Debug\KantoorApplicatie.pdb
+C:\Users\Laptop Roeland\Documents\Visual Studio 2017\Projects\KBS2-Project\KantoorApplicatie\bin\Debug\EntityFramework.dll
+C:\Users\Laptop Roeland\Documents\Visual Studio 2017\Projects\KBS2-Project\KantoorApplicatie\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Laptop Roeland\Documents\Visual Studio 2017\Projects\KBS2-Project\KantoorApplicatie\bin\Debug\PdfSharp.Charting.dll
+C:\Users\Laptop Roeland\Documents\Visual Studio 2017\Projects\KBS2-Project\KantoorApplicatie\bin\Debug\PdfSharp.dll
+C:\Users\Laptop Roeland\Documents\Visual Studio 2017\Projects\KBS2-Project\KantoorApplicatie\bin\Debug\EntityFramework.xml
+C:\Users\Laptop Roeland\Documents\Visual Studio 2017\Projects\KBS2-Project\KantoorApplicatie\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Laptop Roeland\Documents\Visual Studio 2017\Projects\KBS2-Project\KantoorApplicatie\bin\Debug\PdfSharp.xml
+C:\Users\Laptop Roeland\Documents\Visual Studio 2017\Projects\KBS2-Project\KantoorApplicatie\bin\Debug\PdfSharp.Charting.xml
+C:\Users\Laptop Roeland\Documents\Visual Studio 2017\Projects\KBS2-Project\KantoorApplicatie\bin\Debug\de\PdfSharp.resources.dll
+C:\Users\Laptop Roeland\Documents\Visual Studio 2017\Projects\KBS2-Project\KantoorApplicatie\bin\Debug\de\PdfSharp.Charting.resources.dll
+C:\Users\Laptop Roeland\Documents\Visual Studio 2017\Projects\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.csprojResolveAssemblyReference.cache
+C:\Users\Laptop Roeland\Documents\Visual Studio 2017\Projects\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Properties.Resources.resources
+C:\Users\Laptop Roeland\Documents\Visual Studio 2017\Projects\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.ChooseFloor.resources
+C:\Users\Laptop Roeland\Documents\Visual Studio 2017\Projects\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.CustomerForm.resources
+C:\Users\Laptop Roeland\Documents\Visual Studio 2017\Projects\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.DesignPanel.resources
+C:\Users\Laptop Roeland\Documents\Visual Studio 2017\Projects\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.InvoiceManager.InvoiceManagerForm.resources
+C:\Users\Laptop Roeland\Documents\Visual Studio 2017\Projects\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.InvoiceManager.InvoiceManagerItem.resources
+C:\Users\Laptop Roeland\Documents\Visual Studio 2017\Projects\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.InvoiceManager.InvoiceManagerList.resources
+C:\Users\Laptop Roeland\Documents\Visual Studio 2017\Projects\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.InvoiceForm.resources
+C:\Users\Laptop Roeland\Documents\Visual Studio 2017\Projects\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.Invoice.InvoiceListPanel.resources
+C:\Users\Laptop Roeland\Documents\Visual Studio 2017\Projects\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.InvoiceProductPanel.resources
+C:\Users\Laptop Roeland\Documents\Visual Studio 2017\Projects\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.RemoveProductForm.resources
+C:\Users\Laptop Roeland\Documents\Visual Studio 2017\Projects\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.Invoice.RepresentativeForm.resources
+C:\Users\Laptop Roeland\Documents\Visual Studio 2017\Projects\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.MainView.resources
+C:\Users\Laptop Roeland\Documents\Visual Studio 2017\Projects\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.MainMenu.resources
+C:\Users\Laptop Roeland\Documents\Visual Studio 2017\Projects\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.NewProductForm.resources
+C:\Users\Laptop Roeland\Documents\Visual Studio 2017\Projects\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.CatalogListPanel.resources
+C:\Users\Laptop Roeland\Documents\Visual Studio 2017\Projects\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.CatalogProductPanel.resources
+C:\Users\Laptop Roeland\Documents\Visual Studio 2017\Projects\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.RoomMaker.resources
+C:\Users\Laptop Roeland\Documents\Visual Studio 2017\Projects\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.RotatePanel.resources
+C:\Users\Laptop Roeland\Documents\Visual Studio 2017\Projects\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.SaveRoom.resources
+C:\Users\Laptop Roeland\Documents\Visual Studio 2017\Projects\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.ThemeForm.resources
+C:\Users\Laptop Roeland\Documents\Visual Studio 2017\Projects\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.CatalogPanel.resources
+C:\Users\Laptop Roeland\Documents\Visual Studio 2017\Projects\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.ShapeSelector.resources
+C:\Users\Laptop Roeland\Documents\Visual Studio 2017\Projects\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.Themeforms.ThemeImageDeleteForm.resources
+C:\Users\Laptop Roeland\Documents\Visual Studio 2017\Projects\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.Themeforms.ThemeImageForm.resources
+C:\Users\Laptop Roeland\Documents\Visual Studio 2017\Projects\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.Views.Themeforms.ThemeImageFormSave.resources
+C:\Users\Laptop Roeland\Documents\Visual Studio 2017\Projects\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.csproj.GenerateResource.Cache
+C:\Users\Laptop Roeland\Documents\Visual Studio 2017\Projects\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.csproj.CoreCompileInputs.cache
+C:\Users\Laptop Roeland\Documents\Visual Studio 2017\Projects\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.exe
+C:\Users\Laptop Roeland\Documents\Visual Studio 2017\Projects\KBS2-Project\KantoorApplicatie\obj\Debug\KantoorApplicatie.pdb

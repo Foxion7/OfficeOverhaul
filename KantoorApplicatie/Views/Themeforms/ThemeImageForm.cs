@@ -1,0 +1,73 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using KantoorApplicatie.Models.Theme;
+using KantoorApplicatie.Db;
+using KantoorApplicatie.Controllers;
+using KantoorApplicatie.Views.Themeforms;
+
+namespace KantoorApplicatie.Views.Themeforms
+{
+    public partial class ThemeImageForm : Form
+    {
+        private ThemeImageFormSave tifs;
+        public ThemeForm tf { get; set; }
+        public string selectedImagePath { get; set; }
+        public Bitmap image { get; set; }
+        public SubTheme subTheme { get; set; }
+
+        public ThemeImageForm(ThemeForm tf)
+        {
+            this.tf = tf;
+            InitializeComponent();
+            //this.BackgroundImageLayout = ImageLayout.Stretch;
+            //this.BackgroundImage = Converter.ByteArrayToImage(DatabaseController.getLastSubTheme().image);
+        }
+
+        // Opens file browser to select an image
+        private void b_FileBrowser_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog fdlg = new OpenFileDialog();
+            fdlg.Title = "Selecteer een afbeelding";
+            fdlg.InitialDirectory = @"c:\";
+            // Makes sure only image files can be selected
+            fdlg.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
+            fdlg.RestoreDirectory = true;
+            if (fdlg.ShowDialog() == DialogResult.OK)
+            {
+                this.selectedImagePath = fdlg.FileName;
+                this.image = new Bitmap(selectedImagePath);
+                // Setting example image
+                pb_Image.Image = image;
+                pb_Image.SizeMode = PictureBoxSizeMode.StretchImage;
+            }
+        }
+
+        // Opens ThemeImageFormSave
+            private void b_Save_Click(object sender, EventArgs e)
+        {
+            if (pb_Image.Image != null)
+            {
+                tifs = new ThemeImageFormSave(tf, this);
+                tifs.ShowDialog();
+                this.Hide();
+            } else
+            {
+                MessageBox.Show("Upload eerst een foto", "ERROR", MessageBoxButtons.OK);
+            }
+        }
+
+        // Closes this form
+        private void b_Cancel_Click(object sender, EventArgs e)
+        {
+            pb_Image.Image = null;
+            this.Close();
+        }
+    }
+}
